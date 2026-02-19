@@ -1,0 +1,7 @@
+{
+  "name": "HandLy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
