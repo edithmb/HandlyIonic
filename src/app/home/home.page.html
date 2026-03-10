@@ -1,15 +1,19 @@
-<ion-content class="ion-padding">
+<ion-content>
   
-  <div class="contenedor-bienvenida">
+  <div class="home-container">
 
     <div class="seccion-logo">
       <h1 class="fuente-titulos titulo-app" color="primary">HandLy</h1>
     </div>
 
     <div class="seccion-boton">
-      <ion-button routerLink="/selection-rol" class="button-inicio">
-        Empezar
+      <ion-button routerLink="/login" class="button-inicio">
+       {{'HOME.START' | translate}}
       </ion-button>
+    </div>
+
+    <div class="section-logo">
+      <img src="assets/img/Logo_HandLy.png" alt="Logo de HandLy" class="logo-app">
     </div>
 
   </div>

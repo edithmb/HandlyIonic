@@ -1,13 +1,19 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="card-login">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="title-container">
+      <h2 class="fuente-titulos title-app1">{{'LOGIN.TEXT' | translate}}</h2>
+      <h1 class="fuente-titulos title-app2">HandLy</h1>
+    </div>
+
+    <div class="section-buttons">
+      <ion-button routerLink="/sign-in" class="button-sign-in">
+       {{'LOGIN.BUTTON-SIGN-IN' | translate}}
+      </ion-button>
+      <ion-button routerLink="/selection-rol" class="button-sign-up">
+        {{'LOGIN.BUTTON-SIGN-UP' | translate}}
+      </ion-button>
+
+    </div>
+  </div>
 </ion-content>

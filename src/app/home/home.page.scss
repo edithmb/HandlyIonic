@@ -1,3 +1,7 @@
+ion-content {
+  --background: var(--ion-color-light);
+}
+
 #container {
   text-align: center;
 
@@ -26,12 +30,20 @@
   text-decoration: none;
 }
 
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-align: center;
+}
+
 .titulo-app {
   display: flex;
   justify-content: center;
   color: var(--ion-color-primary); 
   font-size: 4.5rem;
   font-weight: bold;
+  margin-top: 25vh;
 }
 
 .seccion-boton {
@@ -49,4 +61,17 @@
   --background-activated: var(--ion-color-secondary-shade);
   --background-hover: var(--ion-color-secondary-shade);
   --ripple-color: var(--ion-color-light);
+}
+
+.section-logo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-app {
+  margin-top: 12.3vh;
+  width: 100%;
+  max-width: 500px;
+  display: block;
 }

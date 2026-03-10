@@ -1,0 +1,10 @@
+{
+    "HOME": {
+        "START": "Start"
+    },
+    "LOGIN": {
+        "TEXT": "Welcome to",
+        "BUTTON-SIGN-IN": "Sign In",
+        "BUTTON-SIGN-UP": "Sign Up"
+    }
+}

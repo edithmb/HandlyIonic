@@ -1,0 +1,10 @@
+{
+    "HOME": {
+        "START": "Començar"
+    },
+    "LOGIN": {
+        "TEXT": "Benvingut a",
+        "BUTTON-SIGN-IN": "Inicia sessió",
+        "BUTTON-SIGN-UP": "Registrar-se"
+    }
+}
