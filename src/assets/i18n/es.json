@@ -1,10 +1,20 @@
 {
-    "home": {
-        "start": "Empezar"
+    "HOME": {
+        "START": "Empezar"
     },
-    "login": {
-        "text": "Bienvenido a",
-        "button-sign-In": "Iniciar Sesión",
-        "button-sign-Up": "Registrarse"
+    "LOGIN": {
+        "TEXT": "Bienvenido a",
+        "BUTTON-SIGN-IN": "Iniciar Sesión",
+        "BUTTON-SIGN-UP": "Registrarse"
+    },
+    "SIGN-IN": {
+        "TEXT": "Nos alegra verte de nuevo en",
+        "TITLE": "Iniciar Sesión",
+        "EMAIL": "Correo Electrónico",
+        "PASSWORD": "Contraseña",
+        "FORGOT-PASSWORD": "¿Has olvidado tu contraseña?",
+        "BUTTON-SIGN-IN": "Iniciar Sesión",
+        "FIRST-TIME": "¿No tienes una cuenta?",
+        "BUTTON-SIGN-UP": "Regístrate"
     }
 }

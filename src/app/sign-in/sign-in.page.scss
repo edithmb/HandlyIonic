@@ -1,0 +1,12 @@
+ion-content {
+    --background: var(--ion-color-primary);
+}
+
+.card-container {
+    background: var(--ion-color-light);
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    max-width: 360px;
+    margin-top: 4vh;
+}

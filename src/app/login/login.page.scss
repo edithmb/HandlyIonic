@@ -7,9 +7,9 @@ ion-content {
     border-radius: 10px;
     padding: 20px;
     width: 100%;
-    max-width: 400px;
+    max-width: 360px;
     margin: auto;
-    margin-top: 20vh;
+    margin-top: 4vh;
     box-shadow: 0 4px 8px rgba(63, 20, 3, 0.1);
 }
 
@@ -22,6 +22,7 @@ ion-content {
 .title-app1 {
     color: var(	--ion-color-medium);
     font-size: 1.5rem;
+    margin-top: 20vh;
 }
 
 .title-app2 {
@@ -29,4 +30,28 @@ ion-content {
     color: var(--ion-color-primary);
     font-size: 2.5rem;
     font-weight: bold;
+}
+
+.section-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 43vh;
+    margin-bottom: 2vh;
+}
+
+.button-sign-in {
+    color: var(--ion-color-light);
+  --background: var(--ion-color-secondary); 
+  --background-activated: var(--ion-color-secondary-shade);
+  --background-hover: var(--ion-color-secondary-shade);
+  --ripple-color: var(--ion-color-light);
+}
+
+.button-sign-up {
+    color: var(--ion-color-light);
+  --background: var(--ion-color-tertiary); 
+  --background-activated: var(--ion-color-tertiary-shade);
+  --background-hover: var(--ion-color-tertiary-shade);
+  --ripple-color: var(--ion-color-light);
 }
