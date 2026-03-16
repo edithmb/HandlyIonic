@@ -1,10 +1,36 @@
-<ion-content>
+<ion-content [scrollY]="false">
     <div class="title-container">
       <h2 class="fuente-titulos title-app1">{{'SIGN-IN.TEXT' | translate}}</h2>
       <h1 class="fuente-titulos title-app2">HandLy</h1>
 
     <div class="card-container" >
-      
+      <h2>{{'SIGN-IN.TITLE' | translate}}</h2>
+      <div>
+        <ion-item>
+          <ion-label position="floating">{{'SIGN-IN.EMAIL' | translate}}</ion-label>
+          <ion-input type="email"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">{{'SIGN-IN.PASSWORD' | translate}}</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+      </div>
+      <h6>
+        {{'SIGN-IN.FORGOT-PASSWORD' | translate}}
+      </h6>
+      <div>
+        <a routerLink="/home-client" class="link-sign-in">
+          <ion-button expand="block" class="button-sign-in">
+            {{'SIGN-IN.BUTTON-SIGN-IN' | translate}}
+          </ion-button>
+        </a>
+        <h6>
+          {{ 'SIGN-IN.FIRST-TIME' | translate }}
+            <a routerLink="/selection-rol" class="link-sign-up">
+              {{ 'SIGN-IN.BUTTON-SIGN-UP' | translate }}
+            </a>
+        </h6>
+      </div>
     </div>
 
   </div>

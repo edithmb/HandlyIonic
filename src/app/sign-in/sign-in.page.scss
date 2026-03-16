@@ -4,9 +4,10 @@ ion-content {
 
 .card-container {
     background: var(--ion-color-light);
-    border-radius: 10px;
+    border-top-right-radius: 200px;
     padding: 20px;
     width: 100%;
-    max-width: 360px;
-    margin-top: 4vh;
+    margin-top: 30vh;
+    height: 60vh;
+    box-sizing: border-box;
 }
