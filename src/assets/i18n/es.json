@@ -20,8 +20,37 @@
     "SELECTION-ROL": {
         "TITLE": "Todo listo para empezar",
         "TEXT": "Por favor, selecciona tu rol para continuar",
-        "BUTTON-USER": "Como Usuario",
-        "BUTTON-PROVIDER": "Como Proveedor"
+        "BUTTON-CLIENT": "Cliente",
+        "TITLE-BUTTON-CLIENT": "Quiero contratar",
+        "SUBTITLE-BUTTON-CLIENT": "Busco un profesional",
+        "BUTTON-PROFESSIONAL": "Profesional",
+        "TITLE-BUTTON-PROFESSIONAL": "Quiero trabajar",
+        "SUBTITLE-BUTTON-PROFESSIONAL": "Ofrezco mis servicios",
+        "BUTTON-CONTINUE": "Continuar",
+        "HAS-ACCOUNT": "¿Ya tienes una cuenta?",
+        "BUTTON-SIGN-IN": "Iniciar Sesión"
+    },
+    "SIGN-UP-CLIENT": {
+        "TITLE": "Crear tu cuenta",
+        "TEXT": "Encuentra la ayuda que necesitas en pocos pasos. ¡Empecemos!",
+        "EMAIL": "Correo Electrónico",
+        "PASSWORD": "Contraseña",
+        "DOCUMENT-TYPE": "Tipo de Documento",
+        "DOCUMENT-NUMBER": "Nº de Documento",
+        "BUTTON-SIGN-UP": "Registrarse",
+        "HAS-ACCOUNT": "¿Ya tienes una cuenta?",
+        "BUTTON-SIGN-IN": "Iniciar Sesión"
+    },
+    "SIGN-UP-PROFESSIONAL": {
+        "TITLE": "Crear cuenta de profesional",
+        "TEXT": "¡Bienvenido! Completa tu perfil para ofrecer tus servicios y conectar con clientes que necesitan tu ayuda.",
+        "EMAIL": "Correo Electrónico",
+        "PASSWORD": "Contraseña",
+        "DOCUMENT-TYPE": "Tipo de Documento",
+        "DOCUMENT-NUMBER": "Nº de Documento",
+        "BUTTON-SIGN-UP": "Registrarse",
+        "HAS-ACCOUNT": "¿Ya tienes una cuenta?",
+        "BUTTON-SIGN-IN": "Iniciar Sesión"
     }
 
 }
