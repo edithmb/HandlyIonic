@@ -1,20 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonLabel, IonItem,  } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-selection-rol',
   templateUrl: './selection-rol.page.html',
   styleUrls: ['./selection-rol.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, RouterLink, FormsModule, TranslateModule, IonButton, IonLabel, IonItem]
+  imports: [IonicModule, CommonModule, FormsModule, TranslateModule]
 })
 export class SelectionRolPage implements OnInit {
 
-  constructor() { }
+  rolSelected: string = '';
+
+  constructor(private router: Router) { }
+
+  selectRole(role: string) {
+    this.rolSelected = role;
+  }
+
+  continue() {
+    if(this.rolSelected === 'Client') {
+      this.router.navigate(['/sign-up-client']);
+    } else if(this.rolSelected === 'Professional') {
+      this.router.navigate(['/sign-up-professional']);
+    }
+  }
+
+  navigateToSignIn() {
+    this.router.navigate(['/sign-in']);
+  }
 
   ngOnInit() {
   }

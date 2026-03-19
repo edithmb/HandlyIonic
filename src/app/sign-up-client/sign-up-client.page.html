@@ -1,13 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>sign-up-client</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content >
+    <div class="card-sign-up">
+        <div class="card-title">
+            <h2>{{ 'SIGN-UP-CLIENT.TITLE' | translate }}</h2>
+            <p>{{ 'SIGN-UP-CLIENT.TEXT' | translate }}</p>
+        </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">sign-up-client</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <div class="form-container">
+
+            <ion-item>
+                <ion-label position="floating">{{ 'SIGN-UP-CLIENT.FULLNAME' | translate }}</ion-label>
+                <ion-input type="text" [(ngModel)]="registerData.fullName"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">{{ 'SIGN-UP-CLIENT.EMAIL' | translate }}</ion-label>
+                <ion-input type="email" [(ngModel)]="registerData.email"></ion-input>
+
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">{{ 'SIGN-UP-CLIENT.PASSWORD' | translate }}</ion-label>
+                <ion-input type="password" [(ngModel)]="registerData.password"></ion-input>
+            </ion-item>
+
+            <ion-item class="input-redondeado" lines="none">
+            <ion-icon name="card-outline" slot="start"></ion-icon>
+            <ion-select [(ngModel)]="registerData.documentType" interface="action-sheet">
+                <ion-select-option value="DNI">DNI</ion-select-option>
+                <ion-select-option value="NIE">NIE</ion-select-option>
+                <ion-select-option value="PASSPORT">{{ 'SIGN-UP-CLIENT.PASSPORT' | translate }}</ion-select-option>
+            </ion-select>
+            </ion-item>
+
+            <ion-item class="input-redondeado" lines="none">
+                <ion-icon name="id-card-outline" slot="start"></ion-icon>
+                <ion-input type="text" [(ngModel)]="registerData.documentNumber" (ionBlur)="validateForm()"></ion-input>
+            </ion-item>
+
+            <div *ngIf="errorMessage" class="message-error">
+                <ion-icon name="alert-circle-outline"></ion-icon>
+                {{ errorMessage }}
+            </div>
+
+
+        </div>
+    </div>
+
 </ion-content>
