@@ -2,12 +2,86 @@ ion-content {
     --background: var(--ion-color-primary);
 }
 
+.title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20vh;
+    width: 100%;
+    padding: 0 20px; 
+    box-sizing: border-box;
+}
+
+.title-app1{
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--ion-color-light);
+    margin: 0;
+}
+
+.title-app2{
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--ion-color-dark);
+    margin: 10px;
+}
+
+.title-app3 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--ion-color-primary);
+    margin-top: 5vh;
+
+}
+
 .card-container {
     background: var(--ion-color-light);
-    border-top-right-radius: 200px;
+    border-top-right-radius: 160px;
     padding: 20px;
     width: 100%;
-    margin-top: 30vh;
+    margin-top: 9vh;
     height: 60vh;
     box-sizing: border-box;
+    padding-bottom: 50vh !important;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5vh;
+}
+
+.forgot-password {
+    font-size: 0.875rem;
+    color: var(--ion-color-medium);
+    text-align: right;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.button-sign-in {
+    --background: var(--ion-color-primary);
+    color: var(--ion-color-light);
+    font-weight: 500;
+    font-size: 1.1rem;
+    margin-top: 5vh;
+}
+
+h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--ion-color-medium);
+  font-weight: 400;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.link-sign-up {
+  color: #5e3b2b;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 4px;
+  transition: opacity 0.2s ease;
 }
