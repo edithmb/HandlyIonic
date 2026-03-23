@@ -52,22 +52,40 @@
   font-style: normal;
 }
 
+/* 2. BOTONES */
 ion-button {
-    --border-radius: 10px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 400;
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-weight: 400 !important;
+  --border-radius: 10px !important;
 }
 
-ion-input, ion-textarea {
-    --border-radius: 10px;
-    --padding-start: 10px;
-    --padding-end: 10px;
-    margin-bottom: 15px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 400;
+.grupo-input {
+  margin-bottom: 20px !important; /* Espacio entre el correo y la contraseña */
 }
 
-ion-item {
-  --border-width: 0px !important;
-  --inner-border-width: 0px !important;
+.label-exterior {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  color: var(--ion-color-medium) !important; /* He puesto un marrón similar al de tu imagen, cámbialo a tu gusto */
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  margin-left: 15px !important; /* Para que quede alineado con el texto de adentro */
+  margin-bottom: 8px !important; 
+  display: block !important; /* Obliga al texto a quedarse arriba de la caja */
+}
+
+/* 3. EL FONDO DE TUS CAJAS DE TEXTO (El color #ECE0D7 que elegiste) */
+ion-item.input-rounded {
+  --background: #ECE0D7 !important;
+  --border-radius: 10px !important;
+  margin-bottom: 0px !important; /* Le quitamos el margen porque ya lo da el grupo-input */
+  --padding-start: 15px !important;
+  --inner-padding-end: 15px !important;
+}
+
+ion-item.input-rounded ion-input {
+  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  --color: var(--ion-color-dark) !important; 
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  --highlight-color-focused: var(--ion-color-primary) !important; 
 }

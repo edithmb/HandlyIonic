@@ -1,37 +1,48 @@
 <ion-content [scrollY]="false">
     <div class="title-container">
-      <h2 class="fuente-titulos title-app1">{{'SIGN-IN.TEXT' | translate}}</h2>
+      <h2 class="fuente-texto title-app1">{{'SIGN-IN.TEXT' | translate}}</h2>
       <h1 class="fuente-titulos title-app2">HandLy</h1>
-
-    <div class="card-container" >
-      <h2>{{'SIGN-IN.TITLE' | translate}}</h2>
-      <div>
-        <ion-item>
-          <ion-label position="floating">{{'SIGN-IN.EMAIL' | translate}}</ion-label>
-          <ion-input type="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">{{'SIGN-IN.PASSWORD' | translate}}</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-      </div>
-      <h6>
-        {{'SIGN-IN.FORGOT-PASSWORD' | translate}}
-      </h6>
-      <div>
-        <a routerLink="/home-client" class="link-sign-in">
-          <ion-button expand="block" class="button-sign-in">
-            {{'SIGN-IN.BUTTON-SIGN-IN' | translate}}
-          </ion-button>
-        </a>
-        <h6>
-          {{ 'SIGN-IN.FIRST-TIME' | translate }}
-            <a routerLink="/selection-rol" class="link-sign-up">
-              {{ 'SIGN-IN.BUTTON-SIGN-UP' | translate }}
-            </a>
-        </h6>
-      </div>
     </div>
 
+    <div class="card-container" >
+      <h2 class="fuente-titulos title-app3">{{'SIGN-IN.TITLE' | translate}}</h2>
+
+    <div class="form-container">
+      
+      <div class="grupo-input">
+        <ion-label class="label-exterior">{{'SIGN-IN.EMAIL' | translate}}</ion-label>
+        <ion-item lines="none" class="input-rounded">
+          <ion-input type="email"></ion-input>
+        </ion-item>
+      </div>
+
+      <div class="grupo-input">
+        <ion-label class="label-exterior">{{'SIGN-IN.PASSWORD' | translate}}</ion-label>
+        <ion-item lines="none" class="input-rounded">
+          <ion-input type="password">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-item>
+      </div>
+
+    </div>
+
+    <h6 class="fuente-texto forgot-password">
+        {{'SIGN-IN.FORGOT-PASSWORD' | translate}}
+    </h6>
+
+    <div>
+      <a routerLink="/home-client" class="link-sign-in">
+        <ion-button expand="block" class="button-sign-in">
+          {{'SIGN-IN.BUTTON-SIGN-IN' | translate}}
+        </ion-button>
+      </a>
+      <h6>
+        {{ 'SIGN-IN.FIRST-TIME' | translate }}
+          <a routerLink="/selection-rol" class="link-sign-up">
+            {{ 'SIGN-IN.BUTTON-SIGN-UP' | translate }}
+          </a>
+      </h6>
+    </div>
   </div>
 </ion-content>
