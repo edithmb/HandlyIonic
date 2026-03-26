@@ -32,15 +32,13 @@
     </h6>
 
     <div>
-      <a routerLink="/home-client" class="link-sign-in">
-        <ion-button expand="block" class="button-sign-in">
+        <ion-button expand="block" class="button-sign-in" routerLink="/home-client">
           {{'SIGN-IN.BUTTON-SIGN-IN' | translate}}
         </ion-button>
-      </a>
       <h6>
         {{ 'SIGN-IN.FIRST-TIME' | translate }}
           <a routerLink="/selection-rol" class="link-sign-up">
-            {{ 'SIGN-IN.BUTTON-SIGN-UP' | translate }}
+            {{'SIGN-IN.BUTTON-SIGN-UP' | translate }}
           </a>
       </h6>
     </div>
