@@ -1,41 +1,43 @@
-<ion-content>
+<ion-content class="pantalla-seleccion">
   <div class="card-selection-rol">
+    
     <div class="header-selection-rol">
       <h2 class="fuente-titulos title-principal">{{ 'SELECTION-ROL.TITLE' | translate }}</h2>
-      <p class="text-principal">{{ 'SELECTION-ROL.TEXT' | translate }}</p>
+      <p class="fuente-texto text-principal">{{ 'SELECTION-ROL.TEXT' | translate }}</p>
     </div>
 
-      <div class="buttons-container">
-        <ion-card button="true" class="card-rol" (click)="selectRole('Client')" [class.active-card]="rolSelected === 'Client'">
-          <img src="assets/img/Client.png" alt="Cliente" class="image-rol" />
-          <ion-card-header>
-            <ion-card-title class="titulo-rol">{{ 'SELECTION-ROL.TITLE-BUTTON-CLIENT' | translate }}</ion-card-title>
-            <ion-card-subtitle>{{ 'SELECTION-ROL.SUBTITLE-BUTTON-CLIENT' | translate }}</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
+    <div class="buttons-container">
+      <!-- Fíjate en la nueva clase "card-cliente" -->
+      <ion-card class="card-rol card-cliente" (click)="selectRole('Client')" [class.active-card]="rolSelected === 'Client'">
+        <img src="assets/img/Client.png" alt="Cliente" class="image-rol" />
+        <ion-card-header>
+          <ion-card-title class="titulo-rol">{{ 'SELECTION-ROL.TITLE-BUTTON-CLIENT' | translate }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
 
-        <ion-card button="true" class="card-rol" (click)="selectRole('Professional')" [class.active-card]="rolSelected === 'Professional'">
-          <img src="assets/img/Professional.png" alt="Profesional" class="image-rol" />
-          <ion-card-header>
-            <ion-card-title class="titulo-rol">{{ 'SELECTION-ROL.TITLE-BUTTON-PROFESSIONAL' | translate }}</ion-card-title>
-            <ion-card-subtitle>{{ 'SELECTION-ROL.SUBTITLE-BUTTON-PROFESSIONAL' | translate }}</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
-      </div>
+      <!-- Fíjate en la nueva clase "card-profesional" -->
+      <ion-card class="card-rol card-profesional" (click)="selectRole('Professional')" [class.active-card]="rolSelected === 'Professional'">
+        <img src="assets/img/Professional.png" alt="Profesional" class="image-rol" />
+        <ion-card-header>
+          <ion-card-title class="titulo-rol">{{ 'SELECTION-ROL.TITLE-BUTTON-PROFESSIONAL' | translate }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </div>
 
-      <div class="conteiner-boton">
+    <div class="conteiner-boton">
       <ion-button expand="block" class="button-continue" 
                   (click)="continue()" 
                   [disabled]="rolSelected === ''">
         {{ 'SELECTION-ROL.BUTTON-CONTINUE' | translate }}
       </ion-button>
 
-      <div>
-        <p>{{ 'SELECTION-ROL.HAS-ACCOUNT' | translate }}</p>
-        <ion-button fill="clear" (click)="navigateToSignIn()">
+      <p class="footer-text">
+        {{ 'SELECTION-ROL.HAS-ACCOUNT' | translate }}
+        <a (click)="navigateToSignIn()" class="link-sign-in">
           {{ 'SELECTION-ROL.BUTTON-SIGN-IN' | translate }}
-        </ion-button>
-      </div>
+        </a>
+      </p>
     </div>
+
   </div>
 </ion-content>
