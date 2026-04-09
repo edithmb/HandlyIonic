@@ -41,6 +41,7 @@
         "DOCUMENT-NUMBER": "Nº de Documento",
         "TITLE-ADDRESS": "Datos de residencia",
         "ADDRESS": "Dirección",
+        "ZIP-CODE": "Código Postal",
         "BUTTON-SIGN-UP": "Registrarse",
         "HAS-ACCOUNT": "¿Ya tienes una cuenta?",
         "BUTTON-SIGN-IN": "Iniciar Sesión"

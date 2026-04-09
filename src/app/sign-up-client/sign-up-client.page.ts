@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -26,9 +26,25 @@ export class SignUpClientPage implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private toastController: ToastController) { }
 
   ngOnInit() {
+  }
+
+  async presentToast(message: string, tipo: 'error' | 'exito' | 'aviso') {
+    // Dependiendo del tipo, le asignamos una clase CSS diferente
+    let clasePersonalizada = 'toast-handly ';
+    if (tipo === 'error') clasePersonalizada += 'toast-error';
+    if (tipo === 'exito') clasePersonalizada += 'toast-exito';
+    if (tipo === 'aviso') clasePersonalizada += 'toast-aviso';
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
+      cssClass: clasePersonalizada // ¡Aquí pasamos nuestra clase!
+    });
+    toast.present();
   }
 
   validateForm(): boolean {
@@ -83,19 +99,24 @@ export class SignUpClientPage implements OnInit {
 
   }
 
-  registrarCliente() {
+  async registerClient() {
     if (!this.validateForm()) {
-      alert('Por favor, introduce un documento válido antes de continuar.');
+      this.presentToast('Revisa el formato de tu documento antes de continuar.', 'error');
       return;
     }
 
     if(this.registerData.fullName === '' || this.registerData.email === '' || this.registerData.password === '' || this.registerData.address === '' || this.registerData.zipCode === '') {
-      alert('Por favor, rellena todos los campos');
+      this.presentToast('Por favor, rellena todos los campos para crear tu cuenta.', 'aviso');
       return; 
     }
 
     console.log('Registrando cliente perfecto:', this.registerData);
-    alert('¡Registro exitoso! Datos validados.');
+    await this.presentToast('¡Registro exitoso!.', 'exito');
+
+    this.router.navigate(['/home-client']);
+  }
+
+    navigateToSignIn() {
+    this.router.navigate(['/sign-in']);
   }
 }
-
