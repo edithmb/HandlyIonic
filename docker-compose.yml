@@ -25,7 +25,7 @@ services:
   # ── Backend PHP ─────────────────────────────────────
   backend:
     build:
-      context: ../../Handly-Backend
+      context: ../Handly-Backend
       dockerfile: Dockerfile
     container_name: handly_backend
     restart: always
