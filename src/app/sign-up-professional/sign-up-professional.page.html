@@ -1,0 +1,130 @@
+<ion-content class="pantalla-signup-profesional">
+  
+  <div class="fondo-azul"></div>
+
+  <div class="card-sign-up">
+      
+      <div class="imagen-container">
+          <img src="assets\img\Logo_HandLy.png" alt="Ilustración HandLy" class="img-header">
+      </div>
+
+      <div class="card-title">
+          <h1 class="fuente-titulos titulo-azul">{{ 'SIGN-UP-PROFESSIONAL.TITLE' | translate }}</h1>
+          <p class="fuente-texto subtitulo-marron">{{ 'SIGN-UP-PROFESSIONAL.TEXT' | translate }}</p>
+      </div>
+
+      <div class="form-container">
+          <div class="grupo-input">
+              <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.FULL-NAME' | translate }}</ion-label>
+              <ion-item lines="none" class="input-rounded">
+                  <ion-input type="text" [(ngModel)]="registerData.fullName"></ion-input>
+              </ion-item>
+          </div>
+
+          <div class="grupo-input">
+              <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.EMAIL' | translate }}</ion-label>
+              <ion-item lines="none" class="input-rounded">
+                  <ion-input type="email" [(ngModel)]="registerData.email"></ion-input>
+              </ion-item>
+          </div>
+
+          <div class="grupo-input">
+              <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.PASSWORD' | translate }}</ion-label>
+              <ion-item lines="none" class="input-rounded">
+                  <ion-input type="password" [(ngModel)]="registerData.password">
+                      <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+                  </ion-input>
+              </ion-item>
+          </div>
+
+          <div class="grupo-input">
+              <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.DOCUMENT-TYPE' | translate }}</ion-label>
+              <ion-item lines="none" class="input-rounded">
+                  <ion-select [(ngModel)]="registerData.documentType" interface="action-sheet" toggleIcon="chevron-down-outline">
+                      <ion-select-option value="DNI">DNI</ion-select-option>
+                      <ion-select-option value="NIE">NIE</ion-select-option>
+                      <ion-select-option value="PASSPORT">Pasaporte</ion-select-option>
+                  </ion-select>
+              </ion-item>
+          </div>
+
+          <div class="grupo-input">
+              <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.DOCUMENT-NUMBER' | translate }}</ion-label>
+              <ion-item lines="none" class="input-rounded">
+                  <ion-input type="text" [(ngModel)]="registerData.documentNumber"></ion-input>
+              </ion-item>
+          </div>
+
+          <h3 class="fuente-titulos titulo-naranja">{{ 'SIGN-UP-PROFESSIONAL.TITLE-ADDRESS' | translate }}</h3>
+
+          <div class="grupo-input">
+              <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.ADDRESS' | translate }}</ion-label>
+              <ion-item lines="none" class="input-rounded">
+                  <ion-input type="text" [(ngModel)]="registerData.address"></ion-input>
+              </ion-item>
+          </div>
+
+          <div class="grupo-input">
+              <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.ZIP-CODE' | translate }}</ion-label>
+              <ion-item lines="none" class="input-rounded">
+                  <ion-input type="text" [(ngModel)]="registerData.zipCode"></ion-input>
+              </ion-item>
+          </div>
+
+          <h3 class="fuente-titulos titulo-naranja">{{ 'SIGN-UP-PROFESSIONAL.TITLE-PROFESSIONAL' | translate }}</h3>
+
+          <div class="grupo-input" *ngFor="let prof of registerData.professions; let i = index; trackBy: trackByIndex">
+              
+              <div class="label-con-icono" *ngIf="i === 0">
+                  <ion-label class="label-exterior">{{ 'SIGN-UP-PROFESSIONAL.PROFESSION' | translate }}</ion-label>
+                  <ion-icon name="add-circle" class="icono-suma-azul" (click)="addProfession()"></ion-icon>
+              </div>
+
+              <ion-label class="label-exterior" *ngIf="i > 0">Profesión {{ i + 1 }}</ion-label>
+
+              <ion-item lines="none" class="input-rounded">
+                  <ion-input 
+                      type="text" 
+                      placeholder="Empieza a escribir..." 
+                      [(ngModel)]="registerData.professions[i]"
+                      (ionInput)="searchProfessions($event, i)"
+                      (ionFocus)="searchProfessions($event, i)">
+                  </ion-input>
+
+                  <ion-icon 
+                      name="trash-outline" 
+                      slot="end" 
+                      class="icono-borrar" 
+                      *ngIf="registerData.professions.length > 1" 
+                      (click)="removeProfession(i)">
+                  </ion-icon>
+              </ion-item>
+
+              <ion-list class="lista-sugerencias" *ngIf="inputActivoIndex === i && profesionesFiltradas.length > 0">
+                  <ion-item button *ngFor="let sugerencia of profesionesFiltradas" (click)="selectProfession(sugerencia, i)">
+                      <ion-label>{{ sugerencia }}</ion-label>
+                  </ion-item>
+              </ion-list>
+          </div>
+
+          <div *ngIf="errorMessage" class="message-error">
+              <ion-icon name="alert-circle-outline"></ion-icon>
+              {{ errorMessage }}
+          </div>
+
+          <div class="conteiner-boton">
+              <ion-button expand="block" class="button-register-azul" (click)="registerProfessional()">
+                  {{ 'SIGN-UP-PROFESSIONAL.BUTTON-SIGN-UP' | translate }}
+              </ion-button>
+
+              <p class="footer-text">
+                  {{ 'SIGN-UP-PROFESSIONAL.HAS-ACCOUNT' | translate }}
+                  <a routerLink="/sign-in" class="link-sign-in">
+                      {{ 'SIGN-UP-PROFESSIONAL.BUTTON-SIGN-IN' | translate }}
+                  </a>
+              </p>
+          </div>
+
+      </div>
+  </div>
+</ion-content>
