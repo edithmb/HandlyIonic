@@ -22,9 +22,18 @@ export class SignUpProfessionalPage implements OnInit {
     documentNumber: '',
     address: '',
     zipCode: '',
+    professions: ['']
   };
 
   errorMessage: string = '';
+
+  profesionesDB: string[] = [
+      'Electricista', 'Fontanero', 'Carpintero', 'Pintor', 
+      'Programador', 'Peluquero', 'Profesor', 'Arquitecto', 
+      'Abogado', 'Albañil', 'Diseñador', 'Mecánico', 'Limpiador'
+    ];
+    profesionesFiltradas: string[] = [];
+    inputActivoIndex: number = -1;
 
   constructor(private router: Router, private toastController: ToastController) { }
 
@@ -42,7 +51,7 @@ export class SignUpProfessionalPage implements OnInit {
       message: message,
       duration: 3000,
       position: 'bottom',
-      cssClass: clasePersonalizada // ¡Aquí pasamos nuestra clase!
+      cssClass: clasePersonalizada
     });
     toast.present();
   }
@@ -99,7 +108,11 @@ export class SignUpProfessionalPage implements OnInit {
 
   }
 
-  async registerClient() {
+  addProfession() {
+    
+  }
+
+  async registerProfessional() {
     if (!this.validateForm()) {
       this.presentToast('Revisa el formato de tu documento antes de continuar.', 'error');
       return;
@@ -110,7 +123,7 @@ export class SignUpProfessionalPage implements OnInit {
       return; 
     }
 
-    console.log('Registrando cliente perfecto:', this.registerData);
+    console.log('Registrando profesional perfecto:', this.registerData);
     await this.presentToast('¡Registro exitoso!.', 'exito');
 
     this.router.navigate(['/home-professional']);
