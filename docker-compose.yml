@@ -37,6 +37,14 @@ services:
       DB_NAME: ${POSTGRES_DB}
     ports:
       - "80:80"
+    volumes: 
+      - ../Handly-Backend:/var/www/html 
+    command: >
+      bash -c "
+      composer install &&
+      if [ -z \"\$$(grep APP_KEY .env | cut -d '=' -f2)\" ]; then php artisan key:generate; fi &&
+      apache2-foreground
+      "
     depends_on:
       db:
         condition: service_healthy

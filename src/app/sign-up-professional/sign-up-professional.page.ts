@@ -4,6 +4,15 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { addIcons } from 'ionicons';
+import { addCircle, trashOutline, alertCircleOutline, chevronDownOutline } from 'ionicons/icons';
+
+addIcons({
+  addCircle,
+  trashOutline,
+  alertCircleOutline,
+  chevronDownOutline
+});
 
 @Component({
   selector: 'app-sign-up-professional',
@@ -109,7 +118,38 @@ export class SignUpProfessionalPage implements OnInit {
   }
 
   addProfession() {
-    
+    if(this.registerData.professions.length < 5 ){
+      this.registerData.professions.push('');
+    } else {
+      this.presentToast('Solo puedes agregar hasta 5 profesiones.', 'aviso');
+    }
+  }
+
+  removeProfession(index: number) {
+    this.registerData.professions.splice(index, 1);
+  }
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
+  }
+
+  searchProfessions(event: any, index: number) {
+    const text = event.target.value.toLowerCase().trim();
+    this.inputActivoIndex = index;
+
+    if(text=== '') {
+      this.profesionesFiltradas = [];
+      return;
+    }
+
+    this.profesionesFiltradas = this.profesionesDB.filter(profesion => 
+      profesion.toLowerCase().includes(text));
+  }
+
+  selectProfession(profession: string, index: number) {
+    this.registerData.professions[index] = profession;
+    this.profesionesFiltradas = [];
+    this.inputActivoIndex = -1;
   }
 
   async registerProfessional() {
@@ -123,7 +163,18 @@ export class SignUpProfessionalPage implements OnInit {
       return; 
     }
 
-    console.log('Registrando profesional perfecto:', this.registerData);
+    const cleanProfessions = this.registerData.professions.filter(prof => prof.trim() !== '');
+    if (cleanProfessions.length === 0) {
+      this.presentToast('Debes seleccionar al menos una profesión.', 'aviso');
+      return;
+    }
+
+    const datosFinales = {
+      ...this.registerData,
+      professions: cleanProfessions
+    };
+
+    console.log('Registrando profesional perfecto:', datosFinales);
     await this.presentToast('¡Registro exitoso!.', 'exito');
 
     this.router.navigate(['/home-professional']);

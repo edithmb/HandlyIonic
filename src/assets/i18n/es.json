@@ -56,6 +56,7 @@
         "DOCUMENT-NUMBER": "Nº de Documento",
         "TITLE-ADDRESS": "Datos de residencia",
         "ADDRESS": "Dirección",
+        "ZIP-CODE": "Código Postal",
         "TITLE-PROFESSIONAL": "Datos profesionales",
         "PROFESSION": "¿A que te dedicas?",
         "BUTTON-SIGN-UP": "Registrarse",
