@@ -1,13 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>verify-email</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="pantalla-verificacion">
+  <div class="main-container">
+    
+    <div class="text-center">
+      <h1 class="fuente-titulos titulo-naranja">Verificar correo electronico</h1>
+      <p class="fuente-texto subtitulo-marron">
+        ¡Ya casi está! Te hemos enviado un código de verificación a <br>
+        <strong>{{ userEmail }}</strong>. Por favor, echa un vistazo a tu bandeja de entrada para activar tu cuenta y empezar.
+      </p>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">verify-email</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="otp-container-bg">
+      <div class="otp-inputs">
+        <input
+          *ngFor="let i of [0,1,2,3,4,5]; let idx = index"
+          type="tel"
+          maxlength="1"
+          class="otp-input"
+          [(ngModel)]="otpCode[idx]"
+          (keyup)="onKeyUp($event, idx)"
+          id="otp-input-{{idx}}"
+        />
+      </div>
+    </div>
+
+    <p class="resend-text fuente-texto">
+      ¿No has recibido nada? <a (click)="resendCode()" class="link-reenviar">Reenviar</a>
+    </p>
+
+    <div class="conteiner-boton">
+      <ion-button expand="block" class="button-orange" (click)="verifyCode()">
+        Verificar
+      </ion-button>
+    </div>
+
+  </div>
 </ion-content>

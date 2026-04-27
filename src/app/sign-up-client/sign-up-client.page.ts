@@ -113,7 +113,7 @@ export class SignUpClientPage implements OnInit {
     console.log('Registrando cliente perfecto:', this.registerData);
     await this.presentToast('¡Registro exitoso!.', 'exito');
 
-    this.router.navigate(['/home-client']);
+    this.router.navigate(['/verify-email']);
   }
 
     navigateToSignIn() {

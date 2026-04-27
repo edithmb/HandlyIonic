@@ -177,7 +177,7 @@ export class SignUpProfessionalPage implements OnInit {
     console.log('Registrando profesional perfecto:', datosFinales);
     await this.presentToast('¡Registro exitoso!.', 'exito');
 
-    this.router.navigate(['/home-professional']);
+    this.router.navigate(['/verify-email']);
   }
 
     navigateToSignIn() {

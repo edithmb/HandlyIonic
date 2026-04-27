@@ -1,0 +1,119 @@
+/* =========================================
+   ESTRUCTURA GENERAL
+   ========================================= */
+ion-content.pantalla-verificacion {
+  --background: var(--ion-color-light) !important;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0 25px;
+}
+
+/* =========================================
+   TEXTOS Y TÍTULOS
+   ========================================= */
+.text-center {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.titulo-naranja {
+  color: var(--ion-color-primary);
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.subtitulo-marron {
+  color: #8E6B5C;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0;
+  
+  strong {
+    color: #5e3b2b; /* Marrón más oscuro para resaltar el correo */
+  }
+}
+
+/* =========================================
+   CAJA DE CÓDIGOS (OTP)
+   ========================================= */
+.otp-container-bg {
+  background-color: #E8DCD1; /* Fondo beige oscuro de la tarjeta */
+  border-radius: 20px;
+  padding: 25px 15px;
+  margin-bottom: 10px;
+}
+
+.otp-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Las cajitas blancas individuales */
+.otp-input {
+  width: 100%;
+  aspect-ratio: 1 / 1.4; /* Hace que sean más altas que anchas (forma de píldora vertical) */
+  border: none;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+  transition: outline 0.2s;
+
+  /* Efecto visual al tocar la caja */
+  &:focus {
+    outline: 2px solid var(--ion-color-primary);;
+  }
+}
+
+/* =========================================
+   REENVIAR Y BOTÓN
+   ========================================= */
+.resend-text {
+  text-align: center;
+  color: #a38273;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  margin-bottom: 40px;
+}
+
+.link-reenviar {
+  color: #5e3b2b;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  &:active {
+    opacity: 0.7;
+  }
+}
+
+.conteiner-boton {
+  display: flex;
+  justify-content: center;
+}
+
+.button-orange {
+  --background: var(--ion-color-primary);
+  color: var(--ion-color-light) !important;
+  --border-radius: 25px;
+  width: 85%;
+  height: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: none;
+  --box-shadow: none;
+}

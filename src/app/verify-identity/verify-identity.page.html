@@ -1,13 +1,49 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>verify-identity</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content class="pantalla-identidad">
+  <div class="main-container">
+    
+    <div class="text-center">
+      <h1 class="fuente-titulos titulo-naranja">Verificar identidad</h1>
+      <p class="fuente-texto subtitulo-marron">
+        Verifica tu identidad en un momento. Sube una foto de tu DNI/NIE y una foto tuya. Es un proceso rápido para proteger tu cuenta y evitar fraudes.
+      </p>
+    </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">verify-identity</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <div class="upload-container">
+
+      <label class="upload-card" [class.uploaded]="selfieUploaded">
+        <input type="file" accept="image/*" capture="user" class="hidden-input" (change)="onFileSelected($event, 'selfie')">
+        
+        <div class="card-content">
+          <span class="card-text">{{ selfieUploaded ? 'Selfie capturado' : 'Hacer selfie ahora' }}</span>
+          <ion-icon [name]="selfieUploaded ? 'checkmark-circle' : 'camera-outline'" class="card-icon"></ion-icon>
+        </div>
+      </label>
+
+      <label class="upload-card" [class.uploaded]="docFrontUploaded">
+        <input type="file" accept="image/*" class="hidden-input" (change)="onFileSelected($event, 'front')">
+        
+        <div class="card-content">
+          <span class="card-text">{{ docFrontUploaded ? 'Foto frontal subida' : 'Foto frontal de tu documento' }}</span>
+          <ion-icon [name]="docFrontUploaded ? 'checkmark-circle' : 'id-card-outline'" class="card-icon"></ion-icon>
+        </div>
+      </label>
+
+      <label class="upload-card" [class.uploaded]="docBackUploaded">
+        <input type="file" accept="image/*" class="hidden-input" (change)="onFileSelected($event, 'back')">
+        
+        <div class="card-content">
+          <span class="card-text">{{ docBackUploaded ? 'Foto trasera subida' : 'Foto trasera de tu documento' }}</span>
+          <ion-icon [name]="docBackUploaded ? 'checkmark-circle' : 'id-card-outline'" class="card-icon"></ion-icon>
+        </div>
+      </label>
+
+    </div>
+
+    <div class="conteiner-boton">
+      <ion-button expand="block" class="button-orange" (click)="verifyIdentity()">
+        Verificar
+      </ion-button>
+    </div>
+
+  </div>
 </ion-content>
