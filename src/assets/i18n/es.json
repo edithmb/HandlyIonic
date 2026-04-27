@@ -62,6 +62,13 @@
         "BUTTON-SIGN-UP": "Registrarse",
         "HAS-ACCOUNT": "¿Ya tienes una cuenta?",
         "BUTTON-SIGN-IN": "Iniciar Sesión"
+    },
+    "VERIFY-EMAIL": {
+        "TITLE": "Verifica tu correo electrónico",
+        "TEXT": "Hemos enviado un código de verificación a tu correo electrónico. Por favor, ingresa el código para continuar.",
+        "CODE": "Código de verificación",
+        "BUTTON-VERIFY": "Verificar",
+        "RESEND-CODE": "Reenviar código"
     }
 
 }

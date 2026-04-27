@@ -117,12 +117,12 @@
                   {{ 'SIGN-UP-PROFESSIONAL.BUTTON-SIGN-UP' | translate }}
               </ion-button>
 
-              <p class="footer-text">
-                  {{ 'SIGN-UP-PROFESSIONAL.HAS-ACCOUNT' | translate }}
-                  <a routerLink="/sign-in" class="link-sign-in">
-                      {{ 'SIGN-UP-PROFESSIONAL.BUTTON-SIGN-IN' | translate }}
-                  </a>
-              </p>
+            <p class="footer-text">
+                {{ 'SELECTION-ROL.HAS-ACCOUNT' | translate }}
+                <a (click)="navigateToSignIn()" class="link-sign-in">
+                {{ 'SELECTION-ROL.BUTTON-SIGN-IN' | translate }}
+                </a>
+            </p>
           </div>
 
       </div>

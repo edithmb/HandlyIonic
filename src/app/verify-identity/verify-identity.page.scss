@@ -1,0 +1,128 @@
+/* =========================================
+   ESTRUCTURA GENERAL
+   ========================================= */
+ion-content.pantalla-identidad {
+  --background: #FCF6F2;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  padding: 0 25px;
+}
+
+/* =========================================
+   TEXTOS Y TÍTULOS
+   ========================================= */
+.text-center {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.titulo-naranja {
+  color: #FF7A45;
+  font-size: 2.2rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+  line-height: 1.2;
+}
+
+.subtitulo-marron {
+  color: #8E6B5C;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* =========================================
+   TARJETAS DE SUBIDA (UPLOAD CARDS)
+   ========================================= */
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+/* Ocultamos el input de HTML nativo */
+.hidden-input {
+  display: none;
+}
+
+/* El diseño de la caja */
+.upload-card {
+  background-color: #E8DCD1;
+  border-radius: 20px;
+  padding: 30px 20px;
+  display: block;
+  cursor: pointer;
+  
+  /* MEJORA UX: Borde punteado para indicar zona de subida */
+  border: 2px dashed rgba(142, 107, 92, 0.4);
+  transition: all 0.3s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .card-text {
+    color: #5e3b2b;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .card-icon {
+    font-size: 2.2rem;
+    color: #8E6B5C;
+    transition: color 0.3s ease;
+  }
+
+  /* ESTADO DE ÉXITO: Cuando la foto ya fue subida */
+  &.uploaded {
+    background-color: rgba(140, 198, 63, 0.15); /* Fondo verde suave */
+    border: 2px solid #8CC63F; /* Borde verde sólido */
+
+    .card-text {
+      color: #2D6B45; /* Verde oscuro */
+      font-weight: 600;
+    }
+
+    .card-icon {
+      color: #8CC63F; /* Checkmark verde */
+    }
+  }
+}
+
+/* =========================================
+   BOTÓN FINAL
+   ========================================= */
+.conteiner-boton {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+}
+
+.button-orange {
+  --background: #FF7A45;
+  color: white;
+  --border-radius: 25px;
+  width: 85%;
+  height: 50px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: none;
+  --box-shadow: none;
+}
