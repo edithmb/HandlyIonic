@@ -1,13 +1,65 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>professional-profile</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="perfil-profesional">
+  
+  <!-- Cabecera Verde con Buscador (Mismo estilo que el mapa) -->
+  <div class="header-verde">
+    <ion-button fill="clear" (click)="regresar()">
+      <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <div class="search-box-mini">
+      <ion-icon name="search-outline"></ion-icon>
+      <input type="text" placeholder="¿Que buscas hoy?">
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">professional-profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="main-container">
+    <!-- Foto de Perfil -->
+    <div class="foto-container">
+      <div class="avatar-grande"></div>
+    </div>
+
+    <!-- Info Principal -->
+    <div class="info-header">
+      <h1 class="fuente-titulos">FEDERICO PELUCHE</h1>
+      <p class="ubicacion">Rubí, Barcelona (a 2,0km)</p>
+      
+      <div class="tags-container">
+        <span class="tag">Fontanero</span>
+        <span class="tag">Carpintero</span>
+        <span class="tag">Carpintero</span>
+      </div>
+    </div>
+
+    <!-- Acerca de mí -->
+    <div class="seccion">
+      <h2 class="titulo-seccion">Acerca de mi</h2>
+      <div class="bio-card">
+        <p>"Pintor con más de 10 años de experiencia en reformas integrales y decoración de interiores..."</p>
+      </div>
+    </div>
+
+    <!-- Botones de Acción -->
+    <div class="acciones-container">
+      <ion-button fill="outline" class="btn-mensaje">Enviar mensaje</ion-button>
+      <ion-button class="btn-solicitud">Hacer solicitud</ion-button>
+    </div>
+
+    <!-- Reseñas -->
+    <div class="seccion-reviews">
+      <h2 class="titulo-seccion">Reviews</h2>
+      <p class="ordenar">Mostradas: Recientes a antiguas</p>
+
+      <!-- Review Item -->
+      <div class="review-item" *ngFor="let i of [1,2,3]">
+        <div class="review-header">
+          <div class="user-mini-avatar"></div>
+          <div class="user-meta">
+            <span class="user-name">Ludovica Peluche</span>
+            <span class="date">23 Febrero 2004</span>
+          </div>
+        </div>
+        <p class="comment">El mejor fontanero que he conocido, lo amo.</p>
+        <div class="stars">★★★★★</div>
+      </div>
+    </div>
+  </div>
 </ion-content>

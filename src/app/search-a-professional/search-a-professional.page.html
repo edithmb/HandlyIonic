@@ -1,13 +1,38 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>search-a-professional</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">search-a-professional</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- 1. El contenedor del mapa (Debe tener un ID único) -->
+  <div id="mapId" class="map-container"></div>
+
+  <!-- 2. Buscador flotante (Arriba) -->
+  <div class="search-overlay">
+    <div class="header-search">
+      <ion-button fill="clear" routerLink="/home-client">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <div class="search-box">
+        <ion-icon name="search-outline"></ion-icon>
+        <input type="text" placeholder="¿Qué buscas hoy?">
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Lista de profesionales (Bottom Sheet) -->
+  <div class="bottom-sheet">
+    <div class="drag-handle"></div>
+    <div class="scrollable-content">
+      
+      <!-- Tarjeta de ejemplo (luego la haremos con un *ngFor) -->
+      <div class="prof-card">
+        <div class="prof-avatar">
+          <ion-icon name="construct-outline"></ion-icon>
+        </div>
+        <div class="prof-info">
+          <h3>Electricista</h3>
+          <p>Rubí, Barcelona (a 2,0km)</p>
+          <div class="stars">⭐⭐⭐⭐⭐</div>
+        </div>
+        <button class="btn-perfil" routerLink="/professional-profile">Ver perfil</button>
+      </div>
+
+    </div>
+  </div>
 </ion-content>

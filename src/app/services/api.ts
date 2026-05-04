@@ -12,8 +12,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  // Esta función es la que "llama a la puerta" de la URL de prueba
-  probarConexion(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/professions`);
+  login(credenciales: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/login`, credenciales);
   }
 }

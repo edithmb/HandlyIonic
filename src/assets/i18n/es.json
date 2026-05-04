@@ -69,6 +69,15 @@
         "CODE": "Código de verificación",
         "BUTTON-VERIFY": "Verificar",
         "RESEND-CODE": "Reenviar código"
+    },
+    "HOME-CLIENT": {
+        "SEARCH-PLACEHOLDER": "¿Qué buscas hoy?",
+        "GREETING": "¡Hola, {{ userName }}!"
+    },
+    "SHARED-MENU": {
+        "HOME": "Inicio",
+        "PROFILE": "Perfil",
+        "NOTIFICATIONS": "Notificaciones",
+        "CHATS": "Chats"
     }
-
 }

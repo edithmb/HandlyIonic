@@ -1,0 +1,57 @@
+<ion-content class="pantalla-home">
+  <div class="main-container">
+    
+<div class="greeting-section">
+      <div class="header-top">
+        <div class="perfil-usuario">
+          <div class="user-avatar-client"></div>
+          <h1 class="fuente-titulos greeting-title">¡Hola, {{ userName }}!</h1>
+        </div>
+      </div>
+
+      <!-- BUSCADOR DEBAJO DEL NOMBRE -->
+      <div class="search-bar-container">
+        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        <input type="text" class="search-input" placeholder="¿Que buscas hoy?">
+      </div>
+    </div>
+
+    <div class="professions-container">
+      
+      <div class="profession-card" routerLink="/search-a-professional">
+        <div class="prof-left">
+          <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
+          <span class="prof-name">Electricista</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
+      </div>
+
+      <div class="profession-card" routerLink="/search-a-professional">
+        <div class="prof-left">
+          <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
+          <span class="prof-name">Fontanero</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
+      </div>
+
+      <div class="profession-card" routerLink="/search-a-professional">
+        <div class="prof-left">
+          <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
+          <span class="prof-name">Carpintero</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
+      </div>
+
+      <div class="profession-card" routerLink="/search-a-professional">
+        <div class="prof-left">
+          <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
+          <span class="prof-name">Pintor</span>
+        </div>
+        <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
+      </div>
+
+    </div>
+
+  </div>
+</ion-content>
+<app-shared-menu></app-shared-menu>

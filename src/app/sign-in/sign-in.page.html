@@ -12,14 +12,14 @@
       <div class="grupo-input">
         <ion-label class="label-exterior">{{'SIGN-IN.EMAIL' | translate}}</ion-label>
         <ion-item lines="none" class="input-rounded">
-          <ion-input type="email"></ion-input>
+          <ion-input type="email" [(ngModel)]="loginData.email" name="email"></ion-input>
         </ion-item>
       </div>
 
       <div class="grupo-input">
         <ion-label class="label-exterior">{{'SIGN-IN.PASSWORD' | translate}}</ion-label>
         <ion-item lines="none" class="input-rounded">
-          <ion-input type="password">
+          <ion-input type="password" [(ngModel)]="loginData.password" name="password">
             <ion-input-password-toggle slot="end"></ion-input-password-toggle>
           </ion-input>
         </ion-item>
@@ -31,10 +31,11 @@
         {{'SIGN-IN.FORGOT-PASSWORD' | translate}}
     </h6>
 
-    <div>
-        <ion-button expand="block" class="button-sign-in" routerLink="/home-client">
-          {{'SIGN-IN.BUTTON-SIGN-IN' | translate}}
-        </ion-button>
+<div>
+      <ion-button expand="block" class="button-sign-in" (click)="signIn()">
+        {{'SIGN-IN.BUTTON-SIGN-IN' | translate}}
+      </ion-button>
+
       <h6>
         {{ 'SIGN-IN.FIRST-TIME' | translate }}
           <a routerLink="/selection-rol" class="link-sign-up">
