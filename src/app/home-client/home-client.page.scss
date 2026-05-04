@@ -2,11 +2,11 @@
    ESTRUCTURA GENERAL
    ========================================= */
 ion-content.pantalla-home {
-  --background: #FCF6F2;
+  --background: var(--ion-color-light);
 }
 
 .main-container {
-  padding: 20px 20px 0 20px;
+  padding: 80px 20px 0 20px;
 }
 
 /* =========================================
@@ -14,49 +14,34 @@ ion-content.pantalla-home {
    ========================================= */
 .header-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* Empuja el perfil a la izquierda y la campana a la derecha */
   align-items: center;
   margin-bottom: 25px;
   margin-top: 10px;
 }
 
-.logo-text {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 800;
-  font-size: 1.5rem;
-  color: #FF7A45;
+/* ESTO ES LO NUEVO: Alinea la foto y el nombre en fila */
+.perfil-usuario {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* El espacio entre el círculo y el texto */
+}
+
+/* Quitamos el margen por defecto del h1 para que no descuadre la altura */
+.greeting-title {
+  margin: 0; 
+  font-size: 1.5rem; /* Ajusta este número si quieres el texto más grande o más pequeño */
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 15px;
-}
-
-.notification-container {
-  position: relative;
-  
-  .bell-icon {
-    font-size: 1.8rem;
-    color: #8E6B5C; 
-  }
-
-  .notification-dot {
-    position: absolute;
-    top: 0;
-    right: 2px;
-    width: 12px;
-    height: 12px;
-    background-color: #FF7A45;
-    border-radius: 50%;
-    border: 2px solid #FCF6F2;
-  }
 }
 
 .user-avatar-client {
-  width: 60px;
-  height: 60px;
-  background-color: #8CC63F; /* Verde Cliente */
+  width: 55px;
+  height: 55px;
+  background-color: var(--ion-color-secondary);
   border-radius: 50%;
 }
 
@@ -64,42 +49,59 @@ ion-content.pantalla-home {
    2. SALUDO Y BÚSQUEDA
    ========================================= */
 .greeting-section {
-  margin-bottom: 25px;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Esto da la separación perfecta entre el nombre y el buscador */
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between; /* Foto a la izquierda, campana a la derecha */
+  align-items: center;
+  width: 100%;
+}
+
+.perfil-usuario {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .greeting-title {
-  color: #5e3b2b;
+  margin: 0;
   font-size: 1.6rem;
-  font-weight: 500;
-  margin: 0 0 15px 0;
+  font-weight: 600;
 }
 
+.user-avatar-client {
+  width: 65px;
+  height: 65px;
+  background-color: #8dbd3c; /* Tu color verde de la imagen */
+  border-radius: 50%;
+}
+
+/* Estilo del buscador para que ocupe su propia línea */
 .search-bar-container {
-  background-color: #E8DCD1;
-  border-radius: 20px;
+  width: 100%;
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  background-color: #ede2d9; /* Color grisáceo/beige de tu imagen */
+  border-radius: 20px;
+  padding: 15px 15px;
+  
+  .search-input {
+    border: none;
+    background: transparent;
+    margin-left: 10px;
+    width: 100%;
+    outline: none;
+    color: #8b7e74;
+  }
   
   .search-icon {
-    color: #8E6B5C;
-    font-size: 1.4rem;
-    margin-right: 10px;
-  }
-
-  .search-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    width: 100%;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.95rem;
-    color: #5e3b2b;
-    
-    &::placeholder {
-      color: #8E6B5C;
-      opacity: 0.8;
-    }
+    color: #8b7e74;
+    font-size: 1.2rem;
   }
 }
 
@@ -112,12 +114,13 @@ ion-content.pantalla-home {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 17px;
+  margin-top: 20px;
   margin-bottom: 20px; /* Margen para que no toque la barra inferior */
 }
 
 .profession-card {
-  background-color: #FCF6F2; /* Blanco/Beige claro */
+  background-color: var(--ion-color-light); /* Blanco/Beige claro */
   border-radius: 15px;
   padding: 12px 20px;
   display: flex;
@@ -137,54 +140,18 @@ ion-content.pantalla-home {
 
   .prof-icon {
     font-size: 1.8rem;
-    color: #8E6B5C;
+    color: var(--ion-color-medium);
   }
 
   .prof-name {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    color: #8E6B5C;
+    color: var(--ion-color-medium);
     font-size: 1.1rem;
     font-weight: 500;
   }
 
   .prof-arrow {
     font-size: 1.5rem;
-    color: #8CC63F; /* Flecha Verde */
-  }
-}
-
-/* =========================================
-   4. BARRA DE NAVEGACIÓN INFERIOR
-   ========================================= */
-.bottom-nav {
-  background-color: #FF7A45;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 15px 10px 25px 10px; 
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.7); 
-  gap: 5px;
-
-  ion-icon {
-    font-size: 1.6rem;
-  }
-
-  span {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.7rem;
-    font-weight: 500;
-  }
-
-  &.active {
-    color: #FFFFFF; 
-    transform: translateY(-2px); 
+    color: var(--ion-color-secondary);
   }
 }

@@ -1,0 +1,29 @@
+<ion-footer class="ion-no-border fondo-transparente">
+  <div class="bottom-nav">
+    
+    <!-- INICIO (Dinámico) -->
+    <div class="nav-item" [routerLink]="startRoute" routerLinkActive="active">
+      <ion-icon name="home"></ion-icon>
+      <span>{{ 'SHARED-MENU.HOME' | translate }}</span>
+    </div>
+    
+    <!-- NOTIFICACIONES -->
+    <div class="nav-item" routerLink="/notificaciones" routerLinkActive="active">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <span>{{ 'SHARED-MENU.NOTIFICATIONS' | translate }}</span>
+    </div>
+    
+    <!-- CHAT -->
+    <div class="nav-item" routerLink="/chats-list" routerLinkActive="active">
+      <ion-icon name="chatbubbles-outline"></ion-icon>
+      <span>{{ 'SHARED-MENU.CHATS' | translate }}</span>
+    </div>
+    
+    <!-- PERFIL -->
+    <div class="nav-item" [routerLink]="profileRoute" routerLinkActive="active">
+      <ion-icon name="person-outline"></ion-icon>
+      <span>{{ 'SHARED-MENU.PROFILE' | translate }}</span>
+    </div>
+
+  </div>
+</ion-footer>

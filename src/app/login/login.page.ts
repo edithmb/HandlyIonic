@@ -25,22 +25,4 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
   }
-
-  // 3. La función que se dispara al tocar el botón amarillo
-hacerPrueba() {
-    console.log('Llamando a la puerta del backend...');
-    
-    this.apiService.probarConexion().subscribe({
-      // ¡Añadimos : any aquí!
-      next: (respuesta: any) => { 
-        console.log('¡ÉXITO! El backend respondió esto:', respuesta);
-        alert('¡Conexión exitosa con el servidor!');
-      },
-      // ¡Y añadimos : any aquí!
-      error: (error: any) => { 
-        console.error('Mmm, algo falló. Detalles del error:', error);
-        alert('Fallo al conectar. Revisa la consola (F12).');
-      }
-    });
-  }
 }

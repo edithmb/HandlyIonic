@@ -1,0 +1,103 @@
+.perfil-profesional {
+  --background: #fdf6ec; // Tu color beige base
+
+  .header-verde {
+    background: #a2c841;
+    padding: 40px 15px 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .search-box-mini {
+      background: white;
+      border-radius: 20px;
+      display: flex;
+      flex: 1;
+      padding: 8px 15px;
+      align-items: center;
+      input { border: none; outline: none; width: 100%; margin-left: 8px; }
+      ion-icon { color: #888; }
+    }
+  }
+}
+
+.main-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.avatar-grande {
+  width: 180px;
+  height: 180px;
+  background: #ede2d9;
+  border-radius: 40px;
+  border: 4px solid #3a97ff; // El borde azul de tu imagen
+  margin: 0 auto 15px;
+}
+
+.info-header {
+  h1 { font-size: 1.8rem; margin: 0; color: #4a3a2e; }
+  .ubicacion { color: #8b7e74; font-size: 0.9rem; margin: 5px 0 15px; }
+}
+
+.tags-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  .tag {
+    background: #73bdec;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+  }
+}
+
+.titulo-seccion {
+  color: #ff7a45;
+  font-size: 1.4rem;
+  margin: 25px 0 10px;
+}
+
+.bio-card {
+  background: #f1e4d8;
+  padding: 15px;
+  border-radius: 20px;
+  p { color: #5a4a3e; line-height: 1.4; margin: 0; font-style: italic; }
+}
+
+.acciones-container {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  
+  ion-button {
+    flex: 1;
+    --border-radius: 12px;
+    height: 45px;
+  }
+  .btn-mensaje { --color: #ff7a45; --border-color: #ff7a45; }
+  .btn-solicitud { --background: #a2c841; }
+}
+
+.review-item {
+  text-align: left;
+  border-bottom: 1px solid #dcd1c5;
+  padding: 15px 0;
+
+  .review-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .user-mini-avatar { width: 45px; height: 45px; background: #e9ddd0; border-radius: 50%; }
+    .user-meta {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      .user-name { font-weight: bold; color: #4a3a2e; }
+      .date { font-size: 0.7rem; color: #999; }
+    }
+  }
+  .comment { margin: 8px 0; color: #666; font-size: 0.9rem; }
+  .stars { color: #ff7a45; letter-spacing: 2px; text-align: right; }
+}

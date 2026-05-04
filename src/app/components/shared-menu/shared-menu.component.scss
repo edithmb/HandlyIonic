@@ -1,0 +1,33 @@
+/* Hacemos que el fondo detrás de la barra naranja sea transparente */
+.fondo-transparente {
+  --background: var(--ion-color-light);
+  background: var(--ion-color-light);
+}
+
+/* Tu barra naranja con los bordes redondeados */
+.bottom-nav {
+  background-color: var(--ion-color-primary); /* Tu color naranja */
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  justify-content: space-around;
+  padding: 15px 10px 20px 10px; /* Ajusta el padding a tu gusto */
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ffc4b3; /* Naranja clarito para los inactivos */
+  font-size: 12px;
+  gap: 4px;
+
+  ion-icon {
+    font-size: 24px;
+  }
+}
+
+/* Angular pondrá esta clase automáticamente cuando estés en esa ruta */
+.nav-item.active {
+  color: var(--ion-color-light); /* Blanco brillante para el activo */
+  font-weight: bold;
+}
