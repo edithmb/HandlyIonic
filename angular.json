@@ -109,7 +109,7 @@
                 "output": "assets"
               }
             ],
-            "styles": ["src/global.scss", "src/theme/variables.scss"],
+            "styles": ["src/global.scss", "node_modules/leaflet/dist/leaflet.css","src/theme/variables.scss"],
             "scripts": []
           },
           "configurations": {
