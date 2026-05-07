@@ -16,4 +16,8 @@ export class ApiService {
   login(credenciales: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credenciales);
   }
+
+  getProfessionalJobs(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/professions`);
+  }
 }

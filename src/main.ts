@@ -2,7 +2,8 @@ import { bootstrapApplication } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 import { importProvidersFrom, Injectable } from '@angular/core';
-import { provideHttpClient, HttpClient } from '@angular/common/http';
+import { provideHttpClient, HttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './app/security/interceptors/auth.interceptors';
 import { Observable } from 'rxjs'; 
 
 
@@ -27,7 +28,7 @@ bootstrapApplication(AppComponent, {
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
 
-    provideHttpClient(), 
+    provideHttpClient(withInterceptors([authInterceptor])), 
 
     importProvidersFrom(
       TranslateModule.forRoot({
