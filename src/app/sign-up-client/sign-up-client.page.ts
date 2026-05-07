@@ -4,6 +4,8 @@ import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up-client',
@@ -26,7 +28,11 @@ export class SignUpClientPage implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private router: Router, private toastController: ToastController) { }
+  constructor(
+    private router: Router, 
+    private toastController: ToastController,
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
   }
@@ -110,12 +116,47 @@ export class SignUpClientPage implements OnInit {
       return; 
     }
 
-    console.log('Registrando cliente perfecto:', this.registerData);
-    await this.presentToast('¡Registro exitoso!.', 'exito');
+    // arreglitos
+    const nameParts = this.registerData.fullName.trim().split(' ');
+    const firstName = nameParts[0] || 'Usuario'; // La primera palabra es el nombre
+    const lastName = nameParts.slice(1).join(' ') || '-';
+    // troceamos direccion
+    const addressParts = this.registerData.address.split(',');
+    const streetNumber = addressParts[0] ? addressParts[0].trim() : this.registerData.address;
+    const city = addressParts[1] ? addressParts[1].trim() : 'No especificada';
+    const country = addressParts[2] ? addressParts[2].trim() : 'España';
 
-    this.router.navigate(['/verify-email']);
+    // datos que espera el backend
+    const payload = {
+      name: firstName,
+      surname: lastName,
+      dni: this.registerData.documentNumber, 
+      email: this.registerData.email,
+      password: this.registerData.password, //Min 6 chars, Mayúscula, minúscula y símbolo
+      street_number: streetNumber,
+      city: city,
+      postal_code: this.registerData.zipCode,
+      country: country
+    };
+
+    // peticion a api
+    const apiUrl = `${environment.apiUrl}/register/client`;
+
+    this.http.post(apiUrl, payload).subscribe({
+      next: async (response: any) => {
+        console.log('Respuesta del servidor:', response);
+        await this.presentToast('¡Registro exitoso!', 'exito');
+        this.router.navigate(['/verify-email']);
+      },
+      error: (err) => {
+        console.error('Error al registrar:', err);
+        const mensajeError = err.error?.message || 'Error al conectar con el servidor.';
+        this.presentToast(mensajeError, 'error');
+      }
+    });
+
+    this.router.navigate(['/verify-email'])
   }
-
     navigateToSignIn() {
     this.router.navigate(['/sign-in']);
   }

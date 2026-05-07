@@ -71,9 +71,13 @@
           <!-- Dirección -->
           <div class="grupo-input">
               <ion-label class="label-exterior">{{ 'SIGN-UP-CLIENT.ADDRESS' | translate }}</ion-label>
+              
+              <p style="font-size: 12px; color: #888; margin: 0 0 5px 5px;">
+                Ej: Calle de Alcalá 12, Madrid, España
+              </p>
+
               <ion-item lines="none" class="input-rounded">
-                  <!-- IMPORTANTE: Tendrás que añadir 'address' y 'zipCode' a tu objeto registerData en el .ts -->
-                  <ion-input type="text" [(ngModel)]="registerData.address"></ion-input>
+                  <ion-input type="text" placeholder="Calle, Ciudad, País" [(ngModel)]="registerData.address"></ion-input>
               </ion-item>
           </div>
 
