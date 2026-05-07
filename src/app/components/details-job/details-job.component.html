@@ -1,3 +1,52 @@
-<p>
-  details-job works!
-</p>
+<div class="modal-full-container">
+  
+  <div class="cabecera">
+    <ion-icon name="arrow-back-outline" class="icono-volver" (click)="regresar()"></ion-icon>
+    <h2 class="fuente-titulos">Detalles de la solicitud</h2>
+  </div>
+
+  <div class="perfil-cliente">
+    <div class="avatar-naranja"></div>
+    <div class="info">
+      <h3 class="nombre">Maradonio Peluche</h3>
+      <div class="rating">
+        <span class="estrellas">★★★★★</span>
+        <span class="puntuacion">5.0</span>
+      </div>
+    </div>
+    <button class="btn-ver-perfil">Ver perfil</button>
+  </div>
+
+  <h1 class="titulo-problema">Cambio del lavabo a causa de rotura</h1>
+  <div class="meta-datos">
+    <p><ion-icon name="location-outline"></ion-icon> Rubí, Barcelona (a 1,9 km)</p>
+    <p><ion-icon name="time-outline"></ion-icon> Hace 5 minutos</p>
+  </div>
+
+  <div class="linea-divisoria"></div>
+
+  <div class="seccion">
+    <h3 class="subtitulo">Descripción</h3>
+    <p class="texto-descriptivo">El baño se ha roto y cada vez que jalo a la cadena el agua se sale por debajo de la taza inundando todo.</p>
+    
+    <div class="galeria">
+      <div class="foto-evidencia img-placeholder"></div>
+      <div class="foto-evidencia img-placeholder">
+        <ion-icon name="play-circle-outline" class="icono-play"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="botones-accion">
+    <ion-button expand="block" class="btn-mensaje" (click)="enviarMensaje()">
+      Enviar Mensaje
+    </ion-button>
+    <ion-button expand="block" class="btn-oferta" (click)="hacerOferta()">
+      Hacer oferta
+    </ion-button>
+    <ion-button expand="block" fill="outline" class="btn-rechazar" (click)="rechazar()">
+      Rechazar solicitud
+    </ion-button>
+  </div>
+
+</div>

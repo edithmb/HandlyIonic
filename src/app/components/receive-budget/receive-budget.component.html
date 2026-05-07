@@ -1,3 +1,77 @@
-<p>
-  receive-budget works!
-</p>
+<div class="modal-full-container">
+  <div class="franja-verde"></div>
+
+  <div class="tarjeta-presupuesto">
+    
+    <div class="cabecera">
+      <ion-icon name="arrow-back-outline" class="icono-volver" (click)="regresar()"></ion-icon>
+      <h2 class="fuente-titulos">Detalles del presupuesto</h2>
+    </div>
+
+    <div class="perfil-profesional">
+      <div class="avatar-naranja"></div>
+      <div class="info">
+        <h3 class="nombre">Federico Peluche</h3>
+        <div class="rating">
+          <span class="estrellas">★★★★<span class="estrella-gris">★</span></span>
+          <span class="puntuacion">4.0</span>
+        </div>
+      </div>
+      <button class="btn-ver-perfil">Ver perfil</button>
+    </div>
+
+    <h1 class="titulo-problema">Cambio del lavabo a causa de rotura</h1>
+    <div class="meta-datos">
+      <p><ion-icon name="location-outline"></ion-icon> Rubí, Barcelona (a 1,9 km)</p>
+      <p><ion-icon name="time-outline"></ion-icon> Hace 1 minuto</p>
+    </div>
+
+    <div class="linea-divisoria"></div>
+
+    <div class="seccion">
+      <h3 class="subtitulo">Descripción</h3>
+      <p class="texto-descriptivo">El baño se ha roto y cada vez que jalo a la cadena el agua se sale por debajo de la taza inundando todo.</p>
+      
+      <div class="galeria">
+        <div class="foto-evidencia img-placeholder"></div>
+        <div class="foto-evidencia img-placeholder">
+          <ion-icon name="play-circle-outline" class="icono-play"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="linea-divisoria"></div>
+
+    <div class="seccion">
+      <h3 class="subtitulo-naranja">Notas del profesional</h3>
+      <div class="caja-notas">
+        <p>La taza del baño esta completamente rota y se necesitara un reemplazo, además de una instalación completa para arreglar su problema.</p>
+      </div>
+    </div>
+
+    <div class="seccion">
+      <h3 class="subtitulo">Precio</h3>
+      <div class="caja-precio">
+        <div class="circulo-euro">€</div>
+        <span class="monto">100</span>
+      </div>
+    </div>
+
+    <div class="opciones-servicio">
+      <div class="opcion activa">
+        <div class="checkbox-custom azul"></div>
+        <span>Incluye materiales y mano de obra.</span>
+      </div>
+      <div class="opcion">
+        <div class="checkbox-custom blanco"></div>
+        <span>Solo esta incluida la mano de obra.</span>
+      </div>
+    </div>
+
+    <div class="botones-accion">
+      <ion-button expand="block" class="btn-aceptar" (click)="aceptar()">Aceptar presupuesto</ion-button>
+      <ion-button expand="block" fill="outline" class="btn-rechazar" (click)="rechazar()">Rechazar</ion-button>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,202 @@
+/* Contenedor principal del modal */
+.modal-full-container {
+  background: transparent;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  font-family: 'Plus Jakarta Sans', sans-serif; /* Ajusta si usas otra fuente */
+}
+
+/* Franja decorativa */
+.franja-verde {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background-color: #8dbd3c;
+  z-index: 0;
+}
+
+/* Tarjeta principal */
+.tarjeta-presupuesto {
+  position: relative;
+  z-index: 1;
+  background-color: #fdf6ec; /* Beige */
+  border-radius: 30px;
+  margin: 40px 15px 20px 15px; /* El margin-top hace que se vea la franja verde detrás */
+  padding: 25px 20px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Cabecera */
+.cabecera {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5d8cc;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+
+  .icono-volver {
+    font-size: 1.6rem;
+    color: #4ebced;
+    cursor: pointer;
+  }
+
+  h2 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    margin-right: 25px;
+    color: #5a4a3e;
+    font-size: 1.2rem;
+  }
+}
+
+/* Perfil */
+.perfil-profesional {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .avatar-naranja {
+    width: 60px;
+    height: 60px;
+    background-color: #ff7a45;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .info {
+    flex: 1;
+    .nombre { margin: 0 0 4px 0; color: #5a4a3e; font-size: 1.1rem; }
+    .rating {
+      display: flex; align-items: center; font-size: 0.9rem;
+      .estrellas { color: #ff7a45; letter-spacing: 1px; }
+      .estrella-gris { color: #dcd1c5; }
+      .puntuacion { margin-left: 5px; color: #999; }
+    }
+  }
+
+  .btn-ver-perfil {
+    background: transparent;
+    border: none;
+    color: #ff7a45;
+    font-size: 0.85rem;
+  }
+}
+
+/* Textos generales */
+.titulo-problema { font-size: 1.2rem; color: #5a4a3e; margin: 0 0 10px 0; line-height: 1.3; }
+.meta-datos p { margin: 5px 0; color: #b09e8f; font-size: 0.85rem; display: flex; align-items: center; gap: 5px; }
+.meta-datos ion-icon { color: #ff7a45; font-size: 1.1rem; }
+
+.linea-divisoria { height: 1px; background-color: #e5d8cc; margin: 20px 0; }
+
+.subtitulo { color: #5a4a3e; font-size: 1.05rem; margin-bottom: 8px; font-weight: bold; }
+.subtitulo-naranja { color: #ff7a45; font-size: 1.05rem; margin-bottom: 8px; font-weight: bold; }
+.texto-descriptivo { color: #8b7e74; font-size: 0.9rem; line-height: 1.4; margin-bottom: 15px; }
+
+/* Fotos */
+.galeria {
+  display: flex;
+  gap: 15px;
+  .img-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #8b7e74;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icono-play {
+    font-size: 2.5rem;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    border-radius: 50%;
+  }
+}
+
+/* Notas */
+.caja-notas {
+  background-color: #eee4da;
+  border-radius: 20px;
+  padding: 15px;
+  p { margin: 0; color: #8b7e74; font-size: 0.9rem; line-height: 1.4; }
+}
+
+/* Precio */
+.caja-precio {
+  display: flex;
+  align-items: center;
+  background-color: #eee4da;
+  border-radius: 25px;
+  width: fit-content;
+  min-width: 200px;
+  padding: 5px;
+  
+  .circulo-euro {
+    width: 35px; height: 35px;
+    background-color: #ff7a45;
+    color: white;
+    border-radius: 50%;
+    display: flex; justify-content: center; align-items: center;
+    font-weight: bold; font-size: 1.2rem;
+  }
+  
+  .monto {
+    margin-left: 20px;
+    font-weight: bold;
+    color: #5a4a3e;
+    font-size: 1.1rem;
+  }
+}
+
+/* Checkboxes */
+.opciones-servicio {
+  margin: 20px 0;
+  
+  .opcion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: #8b7e74;
+    
+    .checkbox-custom {
+      width: 18px; height: 18px;
+      border-radius: 4px;
+      margin-right: 10px;
+    }
+    .azul { background-color: #63b3ed; }
+    .blanco { background-color: transparent; border: 1px solid #63b3ed; }
+  }
+}
+
+/* Botones Finales */
+.botones-accion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 25px;
+
+  .btn-aceptar {
+    --background: #8dbd3c;
+    --border-radius: 12px;
+    height: 50px;
+    font-weight: normal;
+    text-transform: none;
+    font-size: 1rem;
+  }
+
+  .btn-rechazar {
+    --color: #ff4d4f;
+    --border-color: #ff4d4f;
+    --border-radius: 12px;
+    height: 50px;
+    font-weight: normal;
+    text-transform: none;
+    font-size: 1rem;
+  }
+}

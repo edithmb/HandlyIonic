@@ -34,7 +34,7 @@
           <p class="job-location">Rubí, Barcelona (a 2,0km)</p>
           <p class="job-time">Solicitado hace 5 minutos</p>
           
-          <button class="btn-detalles">Ver detalles</button>
+          <button class="btn-detalles" (click)="abrirDetalles()">Ver detalles</button>
         </div>
       </div>
 
@@ -46,7 +46,7 @@
           <h3 class="job-title">Instalación de lampara de techo</h3>
           <p class="job-location">Rubí, Barcelona (a 2,0km)</p>
           <p class="job-time">Solicitado hace 5 minutos</p>
-          <button class="btn-detalles">Ver detalles</button>
+          <button class="btn-detalles" (click)="abrirDetalles()">Ver detalles</button>
         </div>
       </div>
 
@@ -58,31 +58,11 @@
           <h3 class="job-title">Instalación de lampara de techo</h3>
           <p class="job-location">Rubí, Barcelona (a 2,0km)</p>
           <p class="job-time">Solicitado hace 5 minutos</p>
-          <button class="btn-detalles">Ver detalles</button>
+          <button class="btn-detalles" (click)="abrirDetalles()">Ver detalles</button>
         </div>
       </div>
 
     </div>
   </div>
 </ion-content>
-
-<ion-footer class="ion-no-border">
-  <div class="bottom-nav">
-    <div class="nav-item active">
-      <ion-icon name="home"></ion-icon>
-      <span>Inicio</span>
-    </div>
-    <div class="nav-item">
-      <ion-icon name="calendar-outline"></ion-icon>
-      <span>Agenda</span>
-    </div>
-    <div class="nav-item">
-      <ion-icon name="chatbubbles-outline"></ion-icon>
-      <span>Chat</span>
-    </div>
-    <div class="nav-item">
-      <ion-icon name="person-outline"></ion-icon>
-      <span>Perfil</span>
-    </div>
-  </div>
-</ion-footer>
+<app-shared-menu></app-shared-menu>

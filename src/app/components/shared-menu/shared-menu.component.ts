@@ -18,7 +18,7 @@ addIcons({ home, notificationsOutline, chatbubblesOutline, personOutline });
 export class SharedMenuComponent  implements OnInit {
 
   startRoute: string = '/home-client';
-  profileRoute: string = '/profile-client';
+  profileRoute: string = '/client-profile';
 
   constructor() { }
 
@@ -30,7 +30,7 @@ export class SharedMenuComponent  implements OnInit {
 
       if (user.rol_id === 2) {
       this.startRoute = '/home-professional';
-      this.profileRoute = '/profile-professional';
+      this.profileRoute = '/professional-profile';
       }
     }
   }

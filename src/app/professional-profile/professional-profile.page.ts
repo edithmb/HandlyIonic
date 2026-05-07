@@ -15,9 +15,21 @@ import { FormRequestJobComponent } from '../components/form-request-job/form-req
 })
 export class ProfessionalProfilePage implements OnInit {
 
-  constructor(private navCtrl: NavController) { }
+  constructor(
+    private navCtrl: NavController,
+    private modalCtrl: ModalController
+  ) { }
+
   regresar() {
-  this.navCtrl.back();
+    this.navCtrl.back();
+  }
+
+  async abrirSolicitud() {
+    const modal = await this.modalCtrl.create({
+      component: FormRequestJobComponent,
+      cssClass: 'modal-solicitud-css'
+    });
+    return await modal.present();
   }
 
   ngOnInit() {

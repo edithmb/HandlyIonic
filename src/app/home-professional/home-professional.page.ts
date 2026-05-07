@@ -3,6 +3,10 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { addIcons } from 'ionicons';
 import { IonicModule } from '@ionic/angular';
+import { SharedMenuComponent } from '../components/shared-menu/shared-menu.component';
+import { RouterLink } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { DetailsJobComponent } from '../components/details-job/details-job.component'; // Verifica que la ruta sea la correcta
 import { notificationsOutline, constructOutline, home, calendarOutline, chatbubblesOutline, personOutline } from 'ionicons/icons';
 
 addIcons({ notificationsOutline, constructOutline, home, calendarOutline, chatbubblesOutline, personOutline });
@@ -12,13 +16,19 @@ addIcons({ notificationsOutline, constructOutline, home, calendarOutline, chatbu
   templateUrl: './home-professional.page.html',
   styleUrls: ['./home-professional.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule, SharedMenuComponent, RouterLink]
 })
-export class HomeProfessionalPage implements OnInit {
+export class HomeProfessionalPage {
 
-  constructor() {
+  constructor(private modalCtrl: ModalController) {
   }
-  ngOnInit() {
+
+async abrirDetalles() {
+    const modal = await this.modalCtrl.create({
+      component: DetailsJobComponent,
+      cssClass: 'modal-detalles-job' 
+    });
+    return await modal.present();
   }
 
 }
