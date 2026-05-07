@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
   
   // Apuntamos al puerto 80 donde vive el contenedor de Laravel de tu compañera
-  private baseUrl = 'http://localhost:80/api'; 
+  private baseUrl = environment.apiUrl; 
 
   constructor(private http: HttpClient) { }
 
