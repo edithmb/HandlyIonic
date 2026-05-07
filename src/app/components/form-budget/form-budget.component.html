@@ -1,3 +1,71 @@
-<p>
-  form-budget works!
-</p>
+<div class="modal-full-container">
+  
+  <div class="cabecera">
+    <ion-icon name="arrow-back-outline" class="icono-volver" (click)="regresar()"></ion-icon>
+    <h2 class="fuente-titulos">Hacer presupuesto</h2>
+  </div>
+
+  <div class="perfil-cliente">
+    <div class="avatar-naranja"></div>
+    <div class="info">
+      <h3 class="nombre">Maradonio Peluche</h3>
+      <div class="rating">
+        <span class="estrellas">★★★★★</span>
+        <span class="puntuacion">5.0</span>
+      </div>
+    </div>
+    <button class="btn-ver-perfil">Ver perfil</button>
+  </div>
+
+  <h1 class="titulo-problema">Cambio del lavabo a causa de rotura</h1>
+  <div class="meta-datos">
+    <p><ion-icon name="location-outline"></ion-icon> Rubí, Barcelona (a 1,9 km)</p>
+    <p><ion-icon name="time-outline"></ion-icon> Hace 5 minutos</p>
+  </div>
+
+  <div class="seccion-lectura">
+    <h3 class="subtitulo">Descripción</h3>
+    <p class="texto-corto">El baño se ha roto y cada vez que jalo a la cadena el agua se sale por debajo de la taza inundando todo.</p>
+    <div class="galeria-mini">
+      <div class="foto-box"></div>
+      <div class="foto-box video">
+        <ion-icon name="play-circle-outline"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="linea-divisoria"></div>
+
+  <div class="formulario-presupuesto">
+    
+    <div class="label-editable">
+      <h3 class="subtitulo-naranja">Notas personales</h3>
+      <ion-icon name="create-outline" class="icon-edit"></ion-icon>
+    </div>
+
+    <textarea class="caja-notas" [(ngModel)]="notasProfesional"></textarea>
+
+    <h3 class="subtitulo">Precio</h3>
+    <div class="input-precio-container">
+      <div class="circulo-euro">€</div>
+      <input type="number" class="input-invisible" [(ngModel)]="precioOferta">
+    </div>
+
+    <div class="checks-container">
+      <div class="opcion-check" (click)="toggleMateriales(true)">
+        <div class="checkbox" [class.active]="incluyeMateriales"></div>
+        <span>Incluye materiales y mano de obra.</span>
+      </div>
+      <div class="opcion-check" (click)="toggleMateriales(false)">
+        <div class="checkbox" [class.active]="!incluyeMateriales"></div>
+        <span>Solo esta incluida la mano de obra.</span>
+      </div>
+    </div>
+
+    <ion-button expand="block" class="btn-enviar" (click)="enviarPresupuesto()">
+      Enviar presupuesto
+    </ion-button>
+
+  </div>
+
+</div>

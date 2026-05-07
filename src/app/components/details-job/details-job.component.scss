@@ -1,0 +1,114 @@
+.modal-full-container {
+  background-color: #fdf6ec; /* Tu fondo beige */
+  height: 100%;
+  overflow-y: auto;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecera */
+.cabecera {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e5d8cc;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+
+  .icono-volver {
+    font-size: 1.6rem;
+    color: #4ebced; /* Azul claro de la flecha */
+    cursor: pointer;
+  }
+
+  h2 {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+    margin-right: 25px; /* Compensa visualmente el icono */
+    color: #5a4a3e;
+    font-size: 1.2rem;
+  }
+}
+
+/* Perfil del Cliente */
+.perfil-cliente {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .avatar-naranja {
+    width: 60px; height: 60px;
+    background-color: #ff7a45;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+
+  .info {
+    flex: 1;
+    .nombre { margin: 0 0 4px 0; color: #5a4a3e; font-size: 1.1rem; }
+    .rating {
+      display: flex; align-items: center; font-size: 0.9rem;
+      .estrellas { color: #ff7a45; letter-spacing: 1px; }
+      .puntuacion { margin-left: 5px; color: #999; }
+    }
+  }
+
+  .btn-ver-perfil { background: transparent; border: none; color: #ff7a45; font-size: 0.85rem; }
+}
+
+/* Textos Generales */
+.titulo-problema { font-size: 1.3rem; color: #5a4a3e; margin: 0 0 10px 0; line-height: 1.2; }
+.meta-datos p { margin: 5px 0; color: #b09e8f; font-size: 0.85rem; display: flex; align-items: center; gap: 5px; }
+.meta-datos ion-icon { color: #ff7a45; font-size: 1.1rem; }
+
+.linea-divisoria { height: 1px; background-color: #e5d8cc; margin: 20px 0; }
+
+.subtitulo { color: #5a4a3e; font-size: 1.1rem; margin-bottom: 8px; font-weight: bold; }
+.texto-descriptivo { color: #8b7e74; font-size: 0.9rem; line-height: 1.4; margin-bottom: 15px; }
+
+/* Galería de Fotos */
+.galeria {
+  display: flex; gap: 15px; margin-bottom: 30px;
+  .img-placeholder {
+    width: 100px; height: 100px;
+    background-color: #d1c7bd;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .icono-play { font-size: 2.5rem; color: white; background: rgba(0,0,0,0.4); border-radius: 50%; }
+}
+
+/* Botones Inferiores */
+.botones-accion {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto; /* Empuja los botones al fondo de la pantalla si hay espacio */
+  padding-bottom: 10px;
+
+  .btn-mensaje {
+    --background: #ff7a45;
+    --border-radius: 12px;
+    height: 50px;
+    text-transform: none;
+    font-size: 1rem;
+  }
+
+  .btn-oferta {
+    --background: #63b3ed; /* Azul claro del botón */
+    --border-radius: 12px;
+    height: 50px;
+    text-transform: none;
+    font-size: 1rem;
+  }
+
+  .btn-rechazar {
+    --color: #ff4d4f;
+    --border-color: #ff4d4f;
+    --border-radius: 12px;
+    height: 50px;
+    text-transform: none;
+    font-size: 1rem;
+  }
+}
