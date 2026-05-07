@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'alluring-clarity-production-11cc.up.railway.app'
+  apiUrl: 'https://alluring-clarity-production-11cc.up.railway.app/api'
 };
 
 /*

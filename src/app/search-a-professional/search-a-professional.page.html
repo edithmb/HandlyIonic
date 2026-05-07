@@ -1,8 +1,7 @@
 <ion-content [fullscreen]="true">
-  <!-- 1. El contenedor del mapa (Debe tener un ID único) -->
+  
   <div id="mapId" class="map-container"></div>
 
-  <!-- 2. Buscador flotante (Arriba) -->
   <div class="search-overlay">
     <div class="header-search">
       <ion-button fill="clear" routerLink="/home-client">
@@ -10,25 +9,29 @@
       </ion-button>
       <div class="search-box">
         <ion-icon name="search-outline"></ion-icon>
-        <input type="text" placeholder="¿Qué buscas hoy?">
+        <input type="text" [placeholder]="'Buscando: ' + professionName" readonly>
       </div>
     </div>
   </div>
 
-  <!-- 3. Lista de profesionales (Bottom Sheet) -->
   <div class="bottom-sheet">
     <div class="drag-handle"></div>
     <div class="scrollable-content">
       
-      <!-- Tarjeta de ejemplo (luego la haremos con un *ngFor) -->
-      <div class="prof-card">
+      <p *ngIf="professionals.length === 0" style="text-align: center; color: #888; padding: 20px;">
+        No hay profesionales disponibles en esta área.
+      </p>
+
+      <div class="prof-card" *ngFor="let prof of professionals">
         <div class="prof-avatar">
-          <ion-icon name="construct-outline"></ion-icon>
+          <ion-icon name="person-circle-outline" style="font-size: 3rem; color: #ff7a45;"></ion-icon>
         </div>
         <div class="prof-info">
-          <h3>Electricista</h3>
-          <p>Rubí, Barcelona (a 2,0km)</p>
-          <div class="stars">⭐⭐⭐⭐⭐</div>
+          <h3>{{ prof.nombre }}</h3>
+          <p>Rubí, Barcelona ({{ prof.distancia }})</p>
+          <div class="stars">
+            <span style="color:#ff7a45">★★★★★</span>
+          </div>
         </div>
         <button class="btn-perfil" routerLink="/professional-profile">Ver perfil</button>
       </div>

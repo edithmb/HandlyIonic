@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard, publicGuard } from './security/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,8 @@ export const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadComponent: () => import('./sign-in/sign-in.page').then( m => m.SignInPage)
+    loadComponent: () => import('./sign-in/sign-in.page').then( m => m.SignInPage),
+    canActivate: [publicGuard]
   },
   {
     path: 'selection-rol',
@@ -48,11 +50,13 @@ export const routes: Routes = [
   },
   {
     path: 'home-client',
-    loadComponent: () => import('./home-client/home-client.page').then( m => m.HomeClientPage)
+    loadComponent: () => import('./home-client/home-client.page').then( m => m.HomeClientPage),
+    canActivate: [authGuard]
   },
   {
     path: 'home-professional',
-    loadComponent: () => import('./home-professional/home-professional.page').then( m => m.HomeProfessionalPage)
+    loadComponent: () => import('./home-professional/home-professional.page').then( m => m.HomeProfessionalPage),
+    canActivate: [authGuard]
   },
   {
     path: 'search-a-professional',

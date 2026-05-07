@@ -1,51 +1,36 @@
 <ion-content class="pantalla-home">
   <div class="main-container">
     
-<div class="greeting-section">
-      <div class="header-top">
-        <div class="perfil-usuario">
+    <div class="greeting-section">
+      <div class="header-top" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="perfil-usuario" style="display: flex; align-items: center;">
           <div class="user-avatar-client"></div>
           <h1 class="fuente-titulos greeting-title">¡Hola, {{ userName }}!</h1>
         </div>
+        
+        <ion-button fill="clear" color="danger" (click)="cerrarSesion()">
+          <ion-icon slot="icon-only" name="log-out-outline" style="font-size: 1.8rem;"></ion-icon>
+        </ion-button>
       </div>
+    </div>
 
-      <!-- BUSCADOR DEBAJO DEL NOMBRE -->
-      <div class="search-bar-container">
-        <ion-icon name="search-outline" class="search-icon"></ion-icon>
-        <input type="text" class="search-input" placeholder="¿Que buscas hoy?">
-      </div>
+    <div class="search-bar-container">
+      <ion-icon name="search-outline" class="search-icon" (click)="search()"></ion-icon>
+      
+      <input type="text" class="search-input" placeholder="¿Que buscas hoy?" 
+             [(ngModel)]="searchTerm" 
+             (keyup.enter)="search()">
     </div>
 
     <div class="professions-container">
       
-      <div class="profession-card" routerLink="/search-a-professional">
-        <div class="prof-left">
-          <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
-          <span class="prof-name">Electricista</span>
-        </div>
-        <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
-      </div>
+      <p *ngIf="professionalJobs.length === 0" style="text-align:center; color:#888;">Cargando profesiones...</p>
 
-      <div class="profession-card" routerLink="/search-a-professional">
+      <div class="profession-card" *ngFor="let prof of professionalJobs" (click)="professionsFiltered(prof)">
         <div class="prof-left">
           <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
-          <span class="prof-name">Fontanero</span>
-        </div>
-        <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
-      </div>
-
-      <div class="profession-card" routerLink="/search-a-professional">
-        <div class="prof-left">
-          <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
-          <span class="prof-name">Carpintero</span>
-        </div>
-        <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
-      </div>
-
-      <div class="profession-card" routerLink="/search-a-professional">
-        <div class="prof-left">
-          <ion-icon name="construct-outline" class="prof-icon"></ion-icon>
-          <span class="prof-name">Pintor</span>
+          
+          <span class="prof-name">{{ prof.name_profession }}</span>
         </div>
         <ion-icon name="chevron-forward-outline" class="prof-arrow"></ion-icon>
       </div>
