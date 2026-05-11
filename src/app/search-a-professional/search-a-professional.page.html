@@ -27,13 +27,13 @@
           <ion-icon name="person-circle-outline" style="font-size: 3rem; color: #ff7a45;"></ion-icon>
         </div>
         <div class="prof-info">
-          <h3>{{ prof.nombre }}</h3>
-          <p>Rubí, Barcelona ({{ prof.distancia }})</p>
+          <h3>{{ prof.name }} {{ prof.surname }}</h3>
+          <p>{{ prof.city }}, España</p>
           <div class="stars">
             <span style="color:#ff7a45">★★★★★</span>
           </div>
         </div>
-        <button class="btn-perfil" routerLink="/professional-profile">Ver perfil</button>
+        <button class="btn-perfil" [routerLink]="['/professional-profile']" [queryParams]="{ id: prof.professional_id }">Ver perfil</button>
       </div>
 
     </div>

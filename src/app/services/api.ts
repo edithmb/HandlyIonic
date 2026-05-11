@@ -13,11 +13,22 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  // Función de login que envía las credenciales al backend
   login(credenciales: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, credenciales);
   }
 
+  // Función para obtener las profesiones disponibles
   getProfessionalJobs(): Observable<any> {
     return this.http.get(`${this.baseUrl}/professions`);
+  }
+
+  // Función para obtener profesionales por categoría
+  getProfessionalsByCategory(professionId: string) {
+    return this.http.get(`${this.baseUrl}/professionals?profession_id=${professionId}`);
+  }
+
+  getProfessionalById(id: string) {
+    return this.http.get(`${this.baseUrl}/professionals/${id}`);
   }
 }
