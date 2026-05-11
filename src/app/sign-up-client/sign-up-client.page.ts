@@ -145,6 +145,7 @@ export class SignUpClientPage implements OnInit {
     this.http.post(apiUrl, payload).subscribe({
       next: async (response: any) => {
         console.log('Respuesta del servidor:', response);
+        localStorage.setItem('registro_email', this.registerData.email);
         await this.presentToast('¡Registro exitoso!', 'exito');
         this.router.navigate(['/verify-email']);
       },
@@ -155,9 +156,5 @@ export class SignUpClientPage implements OnInit {
       }
     });
 
-    this.router.navigate(['/verify-email'])
-  }
-    navigateToSignIn() {
-    this.router.navigate(['/sign-in']);
   }
 }
