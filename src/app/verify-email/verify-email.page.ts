@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-verify-email',
@@ -17,9 +19,10 @@ export class VerifyEmailPage implements OnInit {
   userEmail: string = 'email@gmail.com'; 
   otpCode: string[] = ['', '', '', '', '', '']; // Array para los 6 dígitos
 
-  constructor(private router: Router, private toastController: ToastController) { }
+  constructor(private router: Router, private toastController: ToastController, private http: HttpClient) { }
 
   ngOnInit() {
+    this.userEmail = localStorage.getItem('registro_email') || 'correo@desconocido.com';
   }
 
   // === LA MAGIA DEL SALTO AUTOMÁTICO ===
@@ -74,10 +77,30 @@ export class VerifyEmailPage implements OnInit {
 
     console.log('Enviando código al backend para verificar:', fullCode);
 
-    // Simulación de éxito (Aquí iría la llamada a tu ApiService)
-    await this.presentToast('¡Correo verificado con éxito!', 'exito');
+    const payload = {
+      email: this.userEmail,
+      code: fullCode
+    };
 
-    this.router.navigate(['/verify-identity']);
+    const apiUrl = `${environment.apiUrl}/verify-email`;
+
+    // 3. Hacemos la llamada real
+    this.http.post(apiUrl, payload).subscribe({
+      next: async (response: any) => {
+        console.log('Verificación exitosa:', response);
+        await this.presentToast('¡Correo verificado con éxito!', 'exito');
+        
+        // ¡OJO! Aquí NO borramos el 'registro_email' del localStorage,
+        // porque la pantalla de VerifyIdentity (la que sigue) lo va a necesitar.
+        this.router.navigate(['/verify-identity']);
+      },
+      error: (err) => {
+        console.error('Error al verificar:', err);
+        // Si el código está mal o caducado, leemos el mensaje de Laravel
+        const mensajeError = err.error?.message || 'Código incorrecto. Comprueba tu correo.';
+        this.presentToast(mensajeError, 'error');
+      }
+    });
   }
 
   resendCode() {

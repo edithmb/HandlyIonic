@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 // Importamos los iconos
 import { addIcons } from 'ionicons';
@@ -15,6 +17,7 @@ import { cameraOutline, idCardOutline, checkmarkCircle, cloudUploadOutline } fro
   standalone: true,
   imports: [IonicModule, CommonModule, FormsModule]
 })
+
 export class VerifyIdentityPage implements OnInit {
 
   // Variables para saber si ya subieron las fotos
@@ -22,7 +25,18 @@ export class VerifyIdentityPage implements OnInit {
   docFrontUploaded: boolean = false;
   docBackUploaded: boolean = false;
 
-  constructor(private router: Router, private toastController: ToastController) { 
+  // variables para saber si ya subieron los archivos reales
+  archivos: { selfie: File | null, front: File | null, back: File | null } = {
+    selfie: null,
+    front: null,
+    back: null
+  };
+
+  constructor(
+    private router: Router, 
+    private toastController: ToastController,
+    private http: HttpClient  
+  ) { 
     // Registramos los iconos
     addIcons({ cameraOutline, idCardOutline, checkmarkCircle, cloudUploadOutline });
   }
@@ -35,7 +49,7 @@ export class VerifyIdentityPage implements OnInit {
     const file = event.target.files[0];
     if (file) {
       // Aquí podrías guardar el archivo real en una variable si necesitas enviarlo al backend
-      // this.misArchivos[type] = file;
+      this.archivos[type] = file;
 
       // Cambiamos el estado visual
       if (type === 'selfie') this.selfieUploaded = true;
@@ -67,12 +81,30 @@ export class VerifyIdentityPage implements OnInit {
       return;
     }
 
-    // Aquí iría la llamada final a tu ApiService para subir las fotos al servidor de Laravel
+    // datos en formato formdata
+    const formData = new FormData();
+    formData.append('selfie', this.archivos.selfie as Blob);
+    formData.append('document_front', this.archivos.front as Blob);
+    formData.append('document_back', this.archivos.back as Blob);
+    const emailUsuario = localStorage.getItem('registro_email') || 'correo_de_prueba@gmail.com'; 
+    formData.append('email', emailUsuario);
     console.log('Enviando fotos al servidor...');
     
-    await this.presentToast('¡Identidad verificada! Bienvenido a HandLy.', 'exito');
-    
-    // Redirigir al inicio (Cambia la ruta según necesites)
-    this.router.navigate(['/home-client']);
+    // peticion a la api 
+    const apiUrl = `${environment.apiUrl}/upload-documents`;
+
+    this.http.post(apiUrl, formData).subscribe({
+      next: async (response: any) => {
+        console.log('Fotos subidas con éxito:', response);
+        localStorage.removeItem('registro_email');
+        await this.presentToast('¡Documentos enviados! Por favor, inicia sesión para comprobar tu estado.', 'exito');
+        this.router.navigate(['/sign-in']); // Lo mandamos al login a esperar
+      },
+      error: (err) => {
+        console.error('Error al subir fotos:', err);
+        this.presentToast('Hubo un error al subir los documentos. Inténtalo de nuevo.', 'error');
+      }
+    });
+
   }
 }

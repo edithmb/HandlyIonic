@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ApiService } from '../services/api';
+import { ToastController } from '@ionic/angular';
 import { IonInputPasswordToggle } from '@ionic/angular/standalone';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonButton, IonInput, IonItem, IonLabel } from '@ionic/angular/standalone';
 
@@ -23,8 +24,25 @@ export class SignInPage {
 
   constructor(
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private toastController: ToastController
   ) {}
+
+  // notis
+  async presentToast(message: string, tipo: 'error' | 'exito' | 'aviso') {
+    let clasePersonalizada = 'toast-handly ';
+    if (tipo === 'error') clasePersonalizada += 'toast-error';
+    if (tipo === 'exito') clasePersonalizada += 'toast-exito';
+    if (tipo === 'aviso') clasePersonalizada += 'toast-aviso';
+
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3500, // 3.5 segundos para que les dé tiempo a leer
+      position: 'bottom',
+      cssClass: clasePersonalizada
+    });
+    toast.present();
+  }
 
   signIn() {
     console.log('TRYING TO SIGN IN WITH', this.loginData);
@@ -51,8 +69,16 @@ export class SignInPage {
       },
       error: (error) => {
         console.error('Login failed:', error);
-        alert('Login failed. Please check your credentials and try again.');
+        if (error.error && error.error.message) {
+          // mensajes del backend
+          const tipoMensaje = error.status === 403 ? 'aviso' : 'error';
+
+          this.presentToast(error.error.message, tipoMensaje);
+
+      } else {
+        this.presentToast('Error al conectar con el servidor. Inténtalo de nuevo.', 'error');
       }
+    }
     });
   }
 }
