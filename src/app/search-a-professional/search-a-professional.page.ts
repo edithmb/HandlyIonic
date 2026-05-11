@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api';
 import { addIcons } from 'ionicons';
+import { Geolocation } from '@capacitor/geolocation';
 import { arrowBackOutline, searchOutline, personCircleOutline } from 'ionicons/icons';
 
 declare var google: any;
@@ -20,9 +21,12 @@ export class SearchAProfessionalPage implements OnInit {
 
   map: any;
   markersGoogle: any[] = [];
+  myLat: number = 0;
+  myLng: number = 0;
 
   professionId: string | null = null;
   professionName: string = '';
+  alltheProfessionals: any[] = [];
   professionals: any[] = [];
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { 
@@ -43,7 +47,7 @@ export class SearchAProfessionalPage implements OnInit {
   }
 
   initMap() {
-const barcelonaCoords = { lat: 41.3851, lng: 2.1734 };
+  const barcelonaCoords = { lat: 41.3851, lng: 2.1734 };
     const mapOptions = {
       center: barcelonaCoords,
       zoom: 13,
@@ -57,6 +61,7 @@ const barcelonaCoords = { lat: 41.3851, lng: 2.1734 };
     // 4. Solo inicializamos Google Maps si encontramos el Div
     if (mapElement) {
       this.map = new google.maps.Map(mapElement, mapOptions);
+      this.getCurrentLocation(); // Centrar en la ubicación actual del usuario
       this.drawMarkers();
     } else {
       console.error('No se encontró el contenedor del mapa (id="mapId") en el HTML');
@@ -64,46 +69,156 @@ const barcelonaCoords = { lat: 41.3851, lng: 2.1734 };
   }
 
   loadProfessionals() {
-    /* NOTA: Aquí iría tu petición real al backend cuando la API esté lista.
-    this.apiService.getProfesionalesPorCategoria(this.profesionId).subscribe(...)
-    */
+    if(!this.professionId) return;
 
-    // DATOS DE PRUEBA SIMULADOS (Para que veas la magia ahora mismo)
-    this.professionals = [
-      { id: 1, nombre: 'Electricista Juan', lat: 41.3951, lng: 2.1834, distancia: 'a 2,0km', rating: 5, profesion: this.professionName },
-      { id: 2, nombre: 'Fontanero Carlos', lat: 41.3751, lng: 2.1634, distancia: 'a 3,5km', rating: 4, profesion: this.professionName }
-    ];
+    this.apiService.getProfessionalsByCategory(this.professionId).subscribe({
+      next: (response: any) => {
+        console.log('Professionals received:', response);
 
-    this.drawMarkers();
+        const realData = response.data || response;
+
+        if (Array.isArray(realData)) {
+          this.alltheProfessionals = realData;
+          this.professionals = [];
+          this.drawMarkers();
+
+        } else {
+          console.error("The response format is unexpected. Expected an array but got:", realData);
+          this.professionals = [];
+        }
+      }, 
+      error: (error) => {
+        console.error('Error fetching professionals:', error);
+      }
+    });
   }
 
   drawMarkers() {
-    // Si el mapa aún no carga o no hay profesionales, no hacemos nada
-    if (!this.map || this.professionals.length === 0) return;
+    // IMPORTANTE: Ahora comprobamos alltheProfessionals en lugar de professionals
+    if (!this.map || this.alltheProfessionals.length === 0) return;
 
-    // Limpiar marcadores viejos (útil si el usuario vuelve a buscar otra cosa)
     this.markersGoogle.forEach(marker => marker.setMap(null));
     this.markersGoogle = [];
+    
+    // Vaciamos la lista visible en el HTML antes de empezar a filtrar
+    this.professionals = [];
 
-    // Añadir los nuevos
-    this.professionals.forEach(prof => {
-      const marker = new google.maps.Marker({
-        position: { lat: prof.lat, lng: prof.lng },
-        map: this.map,
-        title: prof.nombre,
-        animation: google.maps.Animation.DROP // Efecto bonito al caer
+    // Iniciamos el traductor de direcciones
+    const geocoder = new google.maps.Geocoder();
+
+    // Recorremos la lista COMPLETA de profesionales (Madrid, Valencia, etc.)
+    this.alltheProfessionals.forEach(prof => {
+      
+      // Unimos la dirección en texto
+      const direccionCompleta = `${prof.street_number}, ${prof.postal_code}, ${prof.city}, España`;
+
+      // Traducimos la dirección a coordenadas
+      geocoder.geocode({ address: direccionCompleta }, (resultados: any, status: string) => {
+        
+        if (status === 'OK') {
+          // Extraemos latitud y longitud numéricas de la casa del profesional
+          const latReal = resultados[0].geometry.location.lat();
+          const lngReal = resultados[0].geometry.location.lng();
+
+          //CALCULAMOS LA DISTANCIA ENTRE EL CLIENTE Y EL PROFESIONAL
+          const distanciaKm = this.calculateDistance(this.myLat, this.myLng, latReal, lngReal);
+
+          //Solo continuamos si el profesional está a menos de 50km
+          if (distanciaKm <= 50) {
+            
+            prof.distancia = `a ${Math.round(distanciaKm)} km`; 
+            
+            const yaExiste = this.professionals.find(p => p.professional_id === prof.professional_id);
+            if (!yaExiste) {
+              this.professionals.push(prof); 
+            }
+
+            const ubicacionAproximada = this.hideCurrentLocation(latReal, lngReal);
+
+            const circuloProfesional = new google.maps.Circle({
+              strokeColor: "#FF7A45",
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: "#FF7A45",
+              fillOpacity: 0.35,
+              map: this.map,
+              center: ubicacionAproximada,
+              radius: 300
+            });
+
+            const infoWindow = new google.maps.InfoWindow({
+              content: `<div style="color:black; padding:5px;">
+                          <b>${prof.name} ${prof.surname}</b><br>
+                          ${this.professionName}<br>
+                          <i>Ubicación aproximada en ${prof.city}</i>
+                        </div>`
+            });
+
+            circuloProfesional.addListener('click', (evento: any) => {
+              infoWindow.setPosition(evento.latLng);
+              infoWindow.open(this.map);
+            });
+
+            this.markersGoogle.push(circuloProfesional);
+          }
+        } else {
+          console.error(`No se pudo encontrar la calle de ${prof.name}:`, status);
+        }
       });
-
-      const infoWindow = new google.maps.InfoWindow({
-        content: `<div style="color:black; padding:5px;"><b>${prof.nombre}</b><br>${prof.profesion}</div>`
-      });
-
-      marker.addListener('click', () => {
-        infoWindow.open(this.map, marker);
-      });
-
-      this.markersGoogle.push(marker);
     });
+  }
+
+  async getCurrentLocation() {
+    try{
+      const position = await Geolocation.getCurrentPosition({
+        enableHighAccuracy: true,
+      });
+
+      this.myLat = position.coords.latitude;
+      this.myLng = position.coords.longitude;
+
+      if(this.map){
+        this.map.setCenter({ lat: this.myLat, lng: this.myLng });
+        this.map.setZoom(14);
+
+        new google.maps.Marker({
+          position: { lat: this.myLat, lng: this.myLng },
+          map: this.map,
+          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+          title: 'Tú estás aquí'
+        });
+      }
+    } catch (error) {
+      console.error('Error al obtener la ubicación actual:', error);
+    }
+  }
+
+  hideCurrentLocation(latOriginal: number, lngOriginal: number) {
+    const maxDistance = 0.0003;
+    const ruidoLat = (Math.random() * (maxDistance * 2)) - maxDistance;
+    const ruidoLng = (Math.random() * (maxDistance * 2)) - maxDistance;
+
+    return {
+      lat: latOriginal + ruidoLat,
+      lng: lngOriginal + ruidoLng
+    };
+  }
+
+  calculateDistance(lat1: number, lng1: number, lat2: number, lng2: number): number {
+
+    const R = 6371; // Radio de la Tierra en km
+    const dLat = this.gradosARadianes(lat2 - lat1);
+    const dLon = this.gradosARadianes(lng2 - lng1);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(this.gradosARadianes(lat1)) * Math.cos(this.gradosARadianes(lat2)) *
+      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c; 
+  }
+
+  gradosARadianes(grados: number): number {
+    return grados * (Math.PI / 180);
   }
 
 }

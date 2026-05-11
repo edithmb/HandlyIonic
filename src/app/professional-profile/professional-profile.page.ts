@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { ApiService } from '../services/api';
 import { FormRequestJobComponent } from '../components/form-request-job/form-request-job.component';
 
 @Component({
@@ -15,9 +17,13 @@ import { FormRequestJobComponent } from '../components/form-request-job/form-req
 })
 export class ProfessionalProfilePage implements OnInit {
 
+professional: any = null;
+
   constructor(
     private navCtrl: NavController,
-    private modalCtrl: ModalController
+    private modalCtrl: ModalController,
+    private route: ActivatedRoute,
+    private apiService: ApiService
   ) { }
 
   regresar() {
@@ -33,6 +39,24 @@ export class ProfessionalProfilePage implements OnInit {
   }
 
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      const id= params['id'];
+      if(id){
+        this.loadProfessional(id);
+      }
+    });
+  }
+
+  loadProfessional(id: string) {
+    this.apiService.getProfessionalById(id).subscribe({
+      next: (response: any) => {
+        console.log('Loaded professional:', response);
+        this.professional = response.data;
+      },
+      error: (error) => {
+        console.error('Error loading professional:', error);
+      }
+    })
   }
 
 }
