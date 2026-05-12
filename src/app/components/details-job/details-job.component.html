@@ -8,32 +8,39 @@
   <div class="perfil-cliente">
     <div class="avatar-naranja"></div>
     <div class="info">
-      <h3 class="nombre">Maradonio Peluche</h3>
+      <h3 class="nombre">{{ tareaCompleta?.client_name }} {{ tareaCompleta?.client_surname }}</h3>
       <div class="rating">
         <span class="estrellas">★★★★★</span>
-        <span class="puntuacion">5.0</span>
-      </div>
+        <span class="puntuacion">5.0</span> </div>
     </div>
     <button class="btn-ver-perfil">Ver perfil</button>
   </div>
 
-  <h1 class="titulo-problema">Cambio del lavabo a causa de rotura</h1>
+  <h1 class="titulo-problema">{{ tareaCompleta?.title }}</h1>
   <div class="meta-datos">
-    <p><ion-icon name="location-outline"></ion-icon> Rubí, Barcelona (a 1,9 km)</p>
-    <p><ion-icon name="time-outline"></ion-icon> Hace 5 minutos</p>
+    <p><ion-icon name="location-outline"></ion-icon> {{ tareaCompleta?.client_city }}</p>
+    <p><ion-icon name="time-outline"></ion-icon> Solicitado el {{ tareaCompleta?.creation_date }}</p>
+    <p><ion-icon name="calendar-outline"></ion-icon> Horario: {{ tareaCompleta?.time_preference }}</p>
   </div>
 
   <div class="linea-divisoria"></div>
 
   <div class="seccion">
     <h3 class="subtitulo">Descripción</h3>
-    <p class="texto-descriptivo">El baño se ha roto y cada vez que jalo a la cadena el agua se sale por debajo de la taza inundando todo.</p>
+    <p class="texto-descriptivo">{{ tareaCompleta?.description }}</p>
     
-    <div class="galeria">
-      <div class="foto-evidencia img-placeholder"></div>
-      <div class="foto-evidencia img-placeholder">
-        <ion-icon name="play-circle-outline" class="icono-play"></ion-icon>
-      </div>
+    <div class="galeria" *ngIf="tareaCompleta?.photo_1 || tareaCompleta?.photo_2 || tareaCompleta?.video_1 || tareaCompleta?.video_2">
+      
+      <div *ngIf="cargandoMultimedia" class="texto-descriptivo">Cargando fotos/vídeos...</div>
+      
+      <ng-container *ngIf="!cargandoMultimedia">
+        <img *ngIf="tareaCompleta?.photo_1" [src]="tareaCompleta.photo_1" class="foto-evidencia">
+        <img *ngIf="tareaCompleta?.photo_2" [src]="tareaCompleta.photo_2" class="foto-evidencia">
+        
+        <video *ngIf="tareaCompleta?.video_1" [src]="tareaCompleta.video_1" controls class="foto-evidencia"></video>
+        <video *ngIf="tareaCompleta?.video_2" [src]="tareaCompleta.video_2" controls class="foto-evidencia"></video>
+      </ng-container>
+
     </div>
   </div>
 

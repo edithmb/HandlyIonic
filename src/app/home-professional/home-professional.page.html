@@ -13,8 +13,9 @@
     </div>
 
     <div class="greeting-section">
-      <h1 class="fuente-titulos greeting-title">¡Hola, persona random!</h1>
-      <p class="fuente-texto greeting-subtitle">Tienes <strong>5</strong> oportunidades esperandote</p>
+      <h1 class="fuente-titulos greeting-title">¡Hola, {{ userName }}!</h1>
+      <p class="fuente-texto greeting-subtitle">Tienes <strong>{{ tareasPendientes.length }}</strong> oportunidades esperándote</p>
+      
       <ion-button fill="clear" color="danger" (click)="cerrarSesion()">
           <ion-icon slot="icon-only" name="log-out-outline" style="font-size: 1.8rem;"></ion-icon>
       </ion-button>
@@ -27,45 +28,26 @@
 
     <div class="jobs-list">
       
-      <div class="job-card">
+      <div class="job-card" *ngFor="let tarea of tareasPendientes">
         <div class="job-icon-box">
           <ion-icon name="construct-outline"></ion-icon>
         </div>
         
         <div class="job-info">
-          <h3 class="job-title">Instalación de lampara de techo</h3>
-          <p class="job-location">Rubí, Barcelona (a 2,0km)</p>
-          <p class="job-time">Solicitado hace 5 minutos</p>
+          <h3 class="job-title">{{ tarea.title }}</h3>
+          <p class="job-location">{{ tarea.client_city }}</p>
+          <p class="job-time">Solicitado el {{ tarea.creation_date }}</p>
           
-          <button class="btn-detalles" (click)="abrirDetalles()">Ver detalles</button>
+          <button class="btn-detalles" (click)="abrirDetalles(tarea)">Ver detalles</button>
         </div>
       </div>
 
-      <div class="job-card">
-        <div class="job-icon-box">
-          <ion-icon name="construct-outline"></ion-icon>
-        </div>
-        <div class="job-info">
-          <h3 class="job-title">Instalación de lampara de techo</h3>
-          <p class="job-location">Rubí, Barcelona (a 2,0km)</p>
-          <p class="job-time">Solicitado hace 5 minutos</p>
-          <button class="btn-detalles" (click)="abrirDetalles()">Ver detalles</button>
-        </div>
-      </div>
-
-      <div class="job-card">
-        <div class="job-icon-box">
-          <ion-icon name="construct-outline"></ion-icon>
-        </div>
-        <div class="job-info">
-          <h3 class="job-title">Instalación de lampara de techo</h3>
-          <p class="job-location">Rubí, Barcelona (a 2,0km)</p>
-          <p class="job-time">Solicitado hace 5 minutos</p>
-          <button class="btn-detalles" (click)="abrirDetalles()">Ver detalles</button>
-        </div>
+      <div *ngIf="tareasPendientes.length === 0" style="text-align: center; margin-top: 2rem; color: #888;">
+        <p class="fuente-texto">Aún no hay trabajos solicitados.</p>
       </div>
 
     </div>
   </div>
+
 </ion-content>
 <app-shared-menu></app-shared-menu>
