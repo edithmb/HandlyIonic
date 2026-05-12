@@ -156,6 +156,7 @@ export class SignUpClientPage implements OnInit {
       }
     });
 
+    
   }
 
   navigateToSignIn() {
