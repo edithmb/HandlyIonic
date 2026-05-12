@@ -102,7 +102,7 @@
 
               <ion-list class="lista-sugerencias" *ngIf="inputActivoIndex === i && profesionesFiltradas.length > 0">
                   <ion-item button *ngFor="let sugerencia of profesionesFiltradas" (click)="selectProfession(sugerencia, i)">
-                      <ion-label>{{ sugerencia }}</ion-label>
+                      <ion-label>{{ sugerencia.name_profession }}</ion-label>
                   </ion-item>
               </ion-list>
           </div>

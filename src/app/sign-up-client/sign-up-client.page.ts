@@ -156,5 +156,10 @@ export class SignUpClientPage implements OnInit {
       }
     });
 
+    
   }
+  
+   navigateToSignIn() {
+    this.router.navigate(['/sign-in']);
+   }
 }

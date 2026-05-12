@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
 import { addCircle, trashOutline, alertCircleOutline, chevronDownOutline } from 'ionicons/icons';
@@ -36,17 +38,34 @@ export class SignUpProfessionalPage implements OnInit {
 
   errorMessage: string = '';
 
-  profesionesDB: string[] = [
-      'Electricista', 'Fontanero', 'Carpintero', 'Pintor', 
-      'Programador', 'Peluquero', 'Profesor', 'Arquitecto', 
-      'Abogado', 'Albañil', 'Diseñador', 'Mecánico', 'Limpiador'
-    ];
-    profesionesFiltradas: string[] = [];
-    inputActivoIndex: number = -1;
+  profesionesDB: any[] = []; 
+  profesionesFiltradas: any[] = [];
+  inputActivoIndex: number = -1;
 
-  constructor(private router: Router, private toastController: ToastController) { }
+  constructor(private router: Router, 
+    private toastController: ToastController,
+    private http: HttpClient
+  ) { }
 
   ngOnInit() {
+    // cargar profesiones
+    this.obtenerProfesionesDeBD();
+  }
+
+  obtenerProfesionesDeBD() {
+    const apiUrl = `${environment.apiUrl}/professions`;
+    this.http.get(apiUrl).subscribe({
+      next: (response: any) => {
+        if (response.status === 'success') {
+          this.profesionesDB = response.data;
+          console.log('Profesiones cargadas desde la BD:', this.profesionesDB);
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar profesiones:', err);
+        this.presentToast('No se pudieron cargar las profesiones.', 'error');
+      }
+    });
   }
 
   async presentToast(message: string, tipo: 'error' | 'exito' | 'aviso') {
@@ -143,11 +162,11 @@ export class SignUpProfessionalPage implements OnInit {
     }
 
     this.profesionesFiltradas = this.profesionesDB.filter(profesion => 
-      profesion.toLowerCase().includes(text));
+      profesion.name_profession.toLowerCase().includes(text));
   }
 
-  selectProfession(profession: string, index: number) {
-    this.registerData.professions[index] = profession;
+  selectProfession(profession: any, index: number) {
+    this.registerData.professions[index] = profession.name_profession;
     this.profesionesFiltradas = [];
     this.inputActivoIndex = -1;
   }
@@ -169,15 +188,54 @@ export class SignUpProfessionalPage implements OnInit {
       return;
     }
 
-    const datosFinales = {
-      ...this.registerData,
-      professions: cleanProfessions
+    const professionIds = cleanProfessions.map(name => {
+      const encontrada = this.profesionesDB.find(p => p.name_profession === name);
+      return encontrada ? encontrada.id : null;
+    }).filter(id => id !== null); // Quitamos los null por si escribieron algo que no existe
+
+    if (professionIds.length === 0) {
+      this.presentToast('Por favor, selecciona profesiones válidas de la lista.', 'aviso');
+      return;
+    }
+
+    const nameParts = this.registerData.fullName.trim().split(' ');
+    const firstName = nameParts[0] || 'Usuario';
+    const lastName = nameParts.slice(1).join(' ') || '-';
+    const addressParts = this.registerData.address.split(',');
+    const streetNumber = addressParts[0] ? addressParts[0].trim() : this.registerData.address;
+    const city = addressParts[1] ? addressParts[1].trim() : 'No especificada';
+    const country = addressParts[2] ? addressParts[2].trim() : 'España';
+
+    const payload = {
+      name: firstName,
+      surname: lastName,
+      dni: this.registerData.documentNumber, 
+      email: this.registerData.email,
+      password: this.registerData.password, 
+      street_number: streetNumber,
+      city: city,
+      postal_code: this.registerData.zipCode,
+      country: country,
+      professions: professionIds // Enviamos [1, 3] al backend
     };
 
-    console.log('Registrando profesional perfecto:', datosFinales);
-    await this.presentToast('¡Registro exitoso!.', 'exito');
+    const apiUrl = `${environment.apiUrl}/register/professional`;
 
-    this.router.navigate(['/verify-email']);
+    this.http.post(apiUrl, payload).subscribe({
+      next: async (response: any) => {
+        console.log('Respuesta del servidor:', response);
+        localStorage.setItem('registro_email', this.registerData.email);
+        await this.presentToast('¡Registro exitoso!', 'exito');
+        
+        // Mismo flujo que el cliente
+        this.router.navigate(['/verify-email']);
+      },
+      error: (err) => {
+        console.error('Error al registrar profesional:', err);
+        const mensajeError = err.error?.message || 'Error al conectar con el servidor.';
+        this.presentToast(mensajeError, 'error');
+      }
+    });
   }
 
     navigateToSignIn() {
