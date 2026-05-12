@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -30,5 +31,15 @@ export class ApiService {
 
   getProfessionalById(id: string) {
     return this.http.get(`${this.baseUrl}/professionals/${id}`);
+  }
+
+  createTask(taskData: any) {
+    // Obtenemos el token del cliente que inició sesión (asumiendo que lo guardaste en localStorage al hacer login)
+    const token = localStorage.getItem('token'); 
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+
+    return this.http.post(`${this.baseUrl}/tasks`, taskData, { headers });
   }
 }

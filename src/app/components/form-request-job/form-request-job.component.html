@@ -1,5 +1,4 @@
 <div class="modal-wrapper">
-  <!-- Cabecera del Modal -->
   <div class="modal-header">
     <ion-button fill="clear" (click)="cerrar()">
       <ion-icon name="arrow-back-outline" slot="icon-only" class="back-green"></ion-icon>
@@ -8,29 +7,42 @@
   </div>
 
   <div class="modal-body">
-    <!-- 1. Descripción -->
+    
+    <div class="input-section">
+      <div class="section-title">
+        <ion-icon name="information-circle-outline"></ion-icon>
+        <span>Título breve</span>
+      </div>
+      <input type="text" class="custom-textarea" style="height: 40px;" placeholder="Ej: Reparación de grifo" [(ngModel)]="titulo">
+    </div>
+
     <div class="input-section">
       <div class="section-title">
         <ion-icon name="pencil-outline"></ion-icon>
         <span>Describe el problema</span>
       </div>
-      <textarea class="custom-textarea" placeholder="Ej: El grifo de la cocina gotea y no cierra bien"></textarea>
+      <textarea class="custom-textarea" placeholder="Ej: El grifo de la cocina gotea y no cierra bien" [(ngModel)]="descripcion"></textarea>
     </div>
 
-    <!-- 2. Multimedia -->
     <div class="input-section">
       <div class="section-title">
         <ion-icon name="camera-outline"></ion-icon>
-        <span>Añadir multimedia del problema</span>
+        <span>Añadir fotos (Máx. 2)</span>
       </div>
       <div class="media-grid">
-        <div class="add-box" *ngFor="let i of [1,2,3]">
+        
+        <div class="photo-preview" *ngFor="let foto of fotosBase64; let i = index" style="position: relative; display: inline-block; margin-right: 10px;">
+          <img [src]="foto" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
+          <ion-icon name="close-circle" style="position: absolute; top: -5px; right: -5px; color: red; font-size: 24px; z-index: 10;" (click)="deletePhoto(i)"></ion-icon>
+        </div>
+
+        <div class="add-box" (click)="takeFoto()" *ngIf="fotosBase64.length < 2" style="display: inline-block; vertical-align: top;">
           <ion-icon name="add-outline"></ion-icon>
         </div>
+
       </div>
     </div>
 
-    <!-- 3. Ubicación -->
     <div class="input-section">
       <div class="section-title">
         <ion-icon name="location-outline"></ion-icon>
@@ -38,27 +50,12 @@
       </div>
       <div class="location-bar">
         <div class="location-text">
-          <p>Carrer Les Basses, 3, Bajo 1</p>
-          <p>Rubí, Barcelona España 08191</p>
+          <p>Usando ubicación actual</p>
         </div>
-        <button class="btn-change">Cambiar</button>
       </div>
     </div>
 
-    <!-- 4. Fecha -->
-    <div class="input-section">
-      <div class="section-title">
-        <ion-icon name="calendar-outline"></ion-icon>
-        <span>¿Cuando lo necesitas?</span>
-      </div>
-      <div class="custom-select">
-        <span>Lo antes posible</span>
-        <ion-icon name="chevron-down-outline"></ion-icon>
-      </div>
-    </div>
-
-    <!-- Botón Enviar -->
-    <ion-button expand="block" class="btn-enviar" (click)="enviar()">
+    <ion-button expand="block" class="btn-enviar" (click)="send()" [disabled]="!titulo || !descripcion">
       Enviar Solicitud
     </ion-button>
   </div>
