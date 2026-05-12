@@ -158,8 +158,8 @@ export class SignUpClientPage implements OnInit {
 
     
   }
-  
-   navigateToSignIn() {
+
+  navigateToSignIn() {
     this.router.navigate(['/sign-in']);
-   }
+  }
 }
