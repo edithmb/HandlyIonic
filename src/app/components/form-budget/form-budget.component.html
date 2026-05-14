@@ -8,7 +8,7 @@
   <div class="perfil-cliente">
     <div class="avatar-naranja"></div>
     <div class="info">
-      <h3 class="nombre">Maradonio Peluche</h3>
+      <h3 class="nombre">{{ tareaCompleta?.client_name }} {{ tareaCompleta?.client_surname }}</h3>
       <div class="rating">
         <span class="estrellas">★★★★★</span>
         <span class="puntuacion">5.0</span>
@@ -17,20 +17,21 @@
     <button class="btn-ver-perfil">Ver perfil</button>
   </div>
 
-  <h1 class="titulo-problema">Cambio del lavabo a causa de rotura</h1>
+  <h1 class="titulo-problema">{{ tareaCompleta?.title }}</h1>
   <div class="meta-datos">
-    <p><ion-icon name="location-outline"></ion-icon> Rubí, Barcelona (a 1,9 km)</p>
-    <p><ion-icon name="time-outline"></ion-icon> Hace 5 minutos</p>
+    <p><ion-icon name="location-outline"></ion-icon> {{ tareaCompleta?.client_city }}</p>
+    <p><ion-icon name="time-outline"></ion-icon> Solicitado el {{ tareaCompleta?.creation_date }}</p>
   </div>
 
   <div class="seccion-lectura">
     <h3 class="subtitulo">Descripción</h3>
-    <p class="texto-corto">El baño se ha roto y cada vez que jalo a la cadena el agua se sale por debajo de la taza inundando todo.</p>
-    <div class="galeria-mini">
-      <div class="foto-box"></div>
-      <div class="foto-box video">
-        <ion-icon name="play-circle-outline"></ion-icon>
-      </div>
+    <p class="texto-corto">{{ tareaCompleta?.description }}</p>
+    
+    <div class="galeria-mini" *ngIf="tareaCompleta?.photo_1 || tareaCompleta?.photo_2 || tareaCompleta?.video_1 || tareaCompleta?.video_2">
+      <img *ngIf="tareaCompleta?.photo_1" [src]="tareaCompleta.photo_1" class="foto-box">
+      <img *ngIf="tareaCompleta?.photo_2" [src]="tareaCompleta.photo_2" class="foto-box">
+      <video *ngIf="tareaCompleta?.video_1" [src]="tareaCompleta.video_1" class="foto-box video"></video>
+      <video *ngIf="tareaCompleta?.video_2" [src]="tareaCompleta.video_2" class="foto-box video"></video>
     </div>
   </div>
 
