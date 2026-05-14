@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ApiService } from '../services/api';
 import { FormRequestJobComponent } from '../components/form-request-job/form-request-job.component';
 
@@ -13,7 +13,7 @@ import { FormRequestJobComponent } from '../components/form-request-job/form-req
   templateUrl: './professional-profile.page.html',
   styleUrls: ['./professional-profile.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule, RouterLink]
 })
 export class ProfessionalProfilePage implements OnInit {
 
@@ -33,9 +33,12 @@ professional: any = null;
   async abrirSolicitud() {
     const modal = await this.modalCtrl.create({
       component: FormRequestJobComponent,
-      cssClass: 'modal-solicitud-css'
+      componentProps: {
+        professionalId: this.professional.professional_id, // Enviamos el ID al modal
+        professionId: 1 // Aquí deberías mandar el ID de la profesión que estás buscando
+      }
     });
-    return await modal.present();
+    await modal.present();
   }
 
   ngOnInit() {
@@ -58,5 +61,4 @@ professional: any = null;
       }
     })
   }
-
 }
