@@ -42,4 +42,25 @@ export class ApiService {
 
     return this.http.post(`${this.baseUrl}/tasks`, taskData, { headers });
   }
+
+  //Para que el cliente descargue sus notificaciones
+  getNotificaciones() {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.get(`${this.baseUrl}/notifications`, { headers });
+  }
+
+  //Para que el profesional envíe el presupuesto
+  enviarPresupuesto(taskId: number, precio: number) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.post(`${this.baseUrl}/tasks/${taskId}/budget`, { agreed_price: precio }, { headers });
+  }
+
+  //Para que el profesional rechace la tarea (Cambia el estado a 3 = Rechazado)
+  rechazarSolicitud(taskId: number) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.patch(`${this.baseUrl}/tasks/${taskId}/status`, { task_state_id: 3 }, { headers });
+  }
 }

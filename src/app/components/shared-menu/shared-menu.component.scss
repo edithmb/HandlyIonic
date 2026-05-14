@@ -24,6 +24,19 @@
   ion-icon {
     font-size: 24px;
   }
+
+  .dot-badge {
+  position: absolute;
+  top: 8px;
+  right: 25%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--ion-color-light); /* Rojo alerta o usa var(--ion-color-primary) */
+  padding: 0;
+  min-width: auto;
+  min-height: auto;
+  }
 }
 
 /* Angular pondrá esta clase automáticamente cuando estés en esa ruta */

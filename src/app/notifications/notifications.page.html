@@ -1,0 +1,36 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="header-toolbar">
+    <ion-title class="fuente-titulos">Mis Notificaciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="bg-crema">
+  
+  <div class="empty-state" *ngIf="notificaciones.length === 0">
+    <ion-icon name="notifications-off-outline"></ion-icon>
+    <h3>Todo al día</h3>
+    <p>No tienes notificaciones nuevas por ahora.</p>
+  </div>
+
+  <div class="notif-container">
+    
+    <div class="notif-card" *ngFor="let notif of notificaciones" 
+         [class.unread]="notif.is_read === 0 || notif.is_read === false" 
+         (click)="abrirNotificacion(notif)">
+      
+      <div class="icon-box" [ngStyle]="{'background': getIconColor(notif.title)}">
+        <ion-icon [name]="getIconName(notif.title)"></ion-icon>
+      </div>
+
+      <div class="notif-content">
+        <h3 class="notif-title">{{ notif.title }}</h3>
+        <p class="notif-msg">{{ notif.message }}</p>
+        <span class="notif-date">{{ notif.creation_date }}</span>
+      </div>
+
+      <div class="unread-dot" *ngIf="notif.is_read === 0 || notif.is_read === false"></div>
+      
+    </div>
+    
+  </div>
+</ion-content>

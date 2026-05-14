@@ -8,6 +8,7 @@
 
   <div class="modal-body">
     
+    <!-- Título -->
     <div class="input-section">
       <div class="section-title">
         <ion-icon name="information-circle-outline"></ion-icon>
@@ -16,6 +17,7 @@
       <input type="text" class="custom-textarea" style="height: 40px;" placeholder="Ej: Reparación de grifo" [(ngModel)]="titulo">
     </div>
 
+    <!-- Descripción -->
     <div class="input-section">
       <div class="section-title">
         <ion-icon name="pencil-outline"></ion-icon>
@@ -24,38 +26,66 @@
       <textarea class="custom-textarea" placeholder="Ej: El grifo de la cocina gotea y no cierra bien" [(ngModel)]="descripcion"></textarea>
     </div>
 
+    <!-- Multimedia (Fotos y Videos) -->
     <div class="input-section">
       <div class="section-title">
         <ion-icon name="camera-outline"></ion-icon>
-        <span>Añadir fotos (Máx. 2)</span>
+        <span>Añadir multimedia (Opcional)</span>
       </div>
+      
+      <!-- Input de archivo oculto mágico -->
+      <input type="file" #fileInput (change)="loadMultimedia($event)" accept="image/*, video/*" style="display: none;">
+
       <div class="media-grid">
         
+        <!-- Previsualización de Fotos -->
         <div class="photo-preview" *ngFor="let foto of fotosBase64; let i = index" style="position: relative; display: inline-block; margin-right: 10px;">
           <img [src]="foto" style="width: 80px; height: 80px; object-fit: cover; border-radius: 8px;">
           <ion-icon name="close-circle" style="position: absolute; top: -5px; right: -5px; color: red; font-size: 24px; z-index: 10;" (click)="deletePhoto(i)"></ion-icon>
         </div>
 
-        <div class="add-box" (click)="takeFoto()" *ngIf="fotosBase64.length < 2" style="display: inline-block; vertical-align: top;">
+        <!-- Previsualización de Videos (Icono estático) -->
+        <div class="video-preview" *ngFor="let video of videoBase64; let i = index" style="position: relative; display: inline-block; margin-right: 10px; width: 80px; height: 80px; background: #e0e0e0; border-radius: 8px; text-align: center; line-height: 80px;">
+          <ion-icon name="videocam-outline" style="font-size: 32px; color: #ff7a45; vertical-align: middle;"></ion-icon>
+          <ion-icon name="close-circle" style="position: absolute; top: -5px; right: -5px; color: red; font-size: 24px; z-index: 10;" (click)="deleteVideo(i)"></ion-icon>
+        </div>
+
+        <!-- Botón de Añadir (Desaparece si ya hay 2 fotos Y 2 videos) -->
+        <div class="add-box" (click)="triggerFileInput()" *ngIf="fotosBase64.length < 2 || videoBase64.length < 2" style="display: inline-block; vertical-align: top; cursor: pointer;">
           <ion-icon name="add-outline"></ion-icon>
         </div>
 
       </div>
     </div>
 
+    <!-- Ubicación Editable -->
     <div class="input-section">
       <div class="section-title">
         <ion-icon name="location-outline"></ion-icon>
         <span>Ubicación</span>
       </div>
-      <div class="location-bar">
-        <div class="location-text">
-          <p>Usando ubicación actual</p>
-        </div>
+      <!-- En lugar de un texto estático, usamos un textarea que el usuario puede borrar o editar -->
+      <textarea class="custom-textarea" style="height: 60px;" [(ngModel)]="direccionVisual"></textarea>
+    </div>
+
+    <!-- Selector de Horario -->
+    <div class="input-section">
+      <div class="section-title">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>¿Cuándo lo necesitas?</span>
+      </div>
+      <!-- Usamos ion-select de Ionic para el menú desplegable -->
+      <div class="custom-textarea" style="height: auto; padding: 0;">
+        <ion-select [(ngModel)]="tiempoSeleccionado" interface="popover" style="width: 100%; padding: 10px;">
+          <ion-select-option value="Lo antes posible">Lo antes posible</ion-select-option>
+          <ion-select-option value="Entre las 9h y 12h">Entre las 9h y 12h</ion-select-option>
+          <ion-select-option value="Entre 15h hasta las 18h">Entre 15h hasta las 18h</ion-select-option>
+        </ion-select>
       </div>
     </div>
 
-    <ion-button expand="block" class="btn-enviar" (click)="send()" [disabled]="!titulo || !descripcion">
+    <!-- Botón Enviar -->
+    <ion-button expand="block" class="btn-enviar" (click)="send()" [disabled]="!titulo || !descripcion || !direccionVisual">
       Enviar Solicitud
     </ion-button>
   </div>

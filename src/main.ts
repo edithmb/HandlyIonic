@@ -5,6 +5,7 @@ import { importProvidersFrom, Injectable } from '@angular/core';
 import { provideHttpClient, HttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './app/security/interceptors/auth.interceptors';
 import { Observable } from 'rxjs'; 
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
 
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -41,3 +42,5 @@ bootstrapApplication(AppComponent, {
     )
   ],
 });
+
+defineCustomElements(window);

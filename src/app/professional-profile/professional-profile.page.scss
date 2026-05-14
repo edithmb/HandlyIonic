@@ -18,6 +18,15 @@
       input { border: none; outline: none; width: 100%; margin-left: 8px; }
       ion-icon { color: #888; }
     }
+
+    .search-box input,
+    .search-box-mini input {
+      background: transparent !important; /* Elimina el fondo negro */
+      color: #333 !important;             /* Asegura que el texto escrito se vea oscuro */
+      border: none;                       /* Quita cualquier borde por defecto */
+      outline: none;                      /* Quita la línea azul al hacer clic */
+      box-shadow: none;                   /* Quita sombras raras si las hay */
+    }
   }
 }
 
