@@ -1,16 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Route } from '@angular/router';
+import { Router } from '@angular/router';
+import { addIcons } from 'ionicons';
 import { ApiService } from '../services/api';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon } from '@ionic/angular/standalone';
+
+import { 
+  documentTextOutline, 
+  closeCircleOutline, 
+  briefcaseOutline, 
+  checkmarkCircleOutline, 
+  notificationsOutline,
+  notificationsOffOutline
+} from 'ionicons/icons';
+
+
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, CommonModule, FormsModule]
 })
 export class NotificationsPage implements OnInit {
 
@@ -18,8 +30,17 @@ export class NotificationsPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private route: Route
-  ) { }
+    private route: Router
+  ) {
+    addIcons({ 
+      documentTextOutline, 
+      closeCircleOutline, 
+      briefcaseOutline, 
+      checkmarkCircleOutline, 
+      notificationsOutline,
+      notificationsOffOutline
+    });
+   }
 
   ionViewWillEnter() {
     this.loadNotifications();
@@ -60,7 +81,7 @@ export class NotificationsPage implements OnInit {
     return 'var(--ion-color-dark)';
   }
 
-  abrirNotificacion(notif: any) {
+  openNotification(notif: any) {
     notif.is_read = 1;
 
     // 2. Aquí puedes redirigir a los detalles de la tarea para ver el presupuesto

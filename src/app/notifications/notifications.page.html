@@ -6,7 +6,7 @@
 
 <ion-content [fullscreen]="true" class="bg-crema">
   
-  <div class="empty-state" *ngIf="notificaciones.length === 0">
+  <div class="empty-state" *ngIf="notifications.length === 0">
     <ion-icon name="notifications-off-outline"></ion-icon>
     <h3>Todo al día</h3>
     <p>No tienes notificaciones nuevas por ahora.</p>
@@ -14,9 +14,9 @@
 
   <div class="notif-container">
     
-    <div class="notif-card" *ngFor="let notif of notificaciones" 
+    <div class="notif-card" *ngFor="let notif of notifications" 
          [class.unread]="notif.is_read === 0 || notif.is_read === false" 
-         (click)="abrirNotificacion(notif)">
+         (click)="openNotification(notif)">
       
       <div class="icon-box" [ngStyle]="{'background': getIconColor(notif.title)}">
         <ion-icon [name]="getIconName(notif.title)"></ion-icon>
