@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://alluring-clarity-production-11cc.up.railway.app/api'
+  apiUrl: 'https://handly-backend.onrender.com/api'
 };
 
 /*

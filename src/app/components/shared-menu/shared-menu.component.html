@@ -8,8 +8,11 @@
     </div>
     
     <!-- NOTIFICACIONES -->
-    <div class="nav-item" routerLink="/notificaciones" routerLinkActive="active">
+    <div class="nav-item" routerLink="/notificaciones" routerLinkActive="active" style="position: relative;">
       <ion-icon name="notifications-outline"></ion-icon>
+      
+      <span class="dot-badge" *ngIf="hayNotificacionesNuevas"></span>
+      
       <span>{{ 'SHARED-MENU.NOTIFICATIONS' | translate }}</span>
     </div>
     
