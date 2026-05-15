@@ -63,4 +63,24 @@ export class ApiService {
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return this.http.patch(`${this.baseUrl}/tasks/${taskId}/status`, { task_state_id: 3 }, { headers });
   }
+
+  acceptBudget(budgetId: number) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.patch(`${this.baseUrl}/budgets/${budgetId}/accept`, {}, { headers });
+  }
+
+  getTaskDetails(taskId: number) {
+    const token = localStorage.getItem('token'); // Sacamos el token de la sesión
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    
+    // Llamamos a la ruta exacta que tiene tu compañera en el api.php
+    return this.http.get(`${this.baseUrl}/tasks/${taskId}/details`, { headers });
+  }
+
+  getClientTasks() {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.get(`${this.baseUrl}/tasks/client`, { headers });
+  }
 }

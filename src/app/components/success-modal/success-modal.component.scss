@@ -1,0 +1,144 @@
+.modal-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.bg-crema {
+  background-color: var(--ion-color-light);
+}
+
+.modal-body {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 20px;
+  padding: 40px 20px;
+  box-shadow: 0 10px 25px rgba(86, 52, 38, 0.1);
+  text-align: center;
+}
+
+/* Ilustración */
+.illustration-container {
+  position: relative;
+  height: 120px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .icon-pin {
+    font-size: 60px;
+    color: var(--ion-color-tertiary); /* Azul */
+    position: absolute;
+    top: 0;
+    z-index: 2;
+  }
+
+  .icon-person {
+    font-size: 90px;
+    color: var(--ion-color-secondary); /* Verde */
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+  }
+}
+
+/* Títulos y Textos */
+.fuente-titulos {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+
+  &.title-cliente {
+    color: var(--ion-color-primary); /* Naranja */
+  }
+
+  &.title-profesional {
+    color: var(--ion-color-tertiary); /* Azul */
+  }
+}
+
+.subtitle {
+  color: var(--ion-color-dark);
+  font-size: 1rem;
+  margin-bottom: 30px;
+}
+
+/* Detalles de la tarea */
+.task-details {
+  margin-bottom: 40px;
+
+  .task-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: var(--ion-color-dark);
+    margin-bottom: 10px;
+  }
+
+  .time-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+
+    ion-icon {
+      margin-right: 5px;
+      color: var(--ion-color-primary);
+    }
+  }
+}
+
+/* Botón Cliente */
+.btn-verde {
+  --background: var(--ion-color-secondary);
+  --background-activated: var(--ion-color-secondary-shade);
+  --border-radius: 10px;
+  --box-shadow: none;
+  font-weight: bold;
+  height: 50px;
+}
+
+/* Estilos para el QR del Profesional */
+.qr-container {
+  margin-top: 20px;
+  
+  .qr-instruction {
+    font-size: 0.85rem;
+    color: var(--ion-color-medium);
+    margin-bottom: 15px;
+  }
+
+  .qr-placeholder {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 20px auto;
+    border: 2px dashed var(--ion-color-tertiary);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--ion-color-tertiary);
+
+    ion-icon {
+      font-size: 50px;
+      margin-bottom: 10px;
+    }
+
+    span {
+      font-size: 0.7rem;
+      word-break: break-all;
+      padding: 0 10px;
+    }
+  }
+
+  .btn-cerrar {
+    --color: var(--ion-color-medium);
+    font-weight: bold;
+  }
+}

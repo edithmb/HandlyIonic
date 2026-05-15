@@ -1,4 +1,4 @@
-<div class="modal-full-container">
+<div class="modal-full-container" *ngIf="!loading && taskDetails">
   <div class="franja-verde"></div>
 
   <div class="tarjeta-presupuesto">
@@ -11,7 +11,7 @@
     <div class="perfil-profesional">
       <div class="avatar-naranja"></div>
       <div class="info">
-        <h3 class="nombre">Federico Peluche</h3>
+        <h3 class="nombre">{{ taskDetails.professional_name || 'Profesional Asignado' }}</h3>
         <div class="rating">
           <span class="estrellas">★★★★<span class="estrella-gris">★</span></span>
           <span class="puntuacion">4.0</span>
@@ -20,22 +20,33 @@
       <button class="btn-ver-perfil">Ver perfil</button>
     </div>
 
-    <h1 class="titulo-problema">Cambio del lavabo a causa de rotura</h1>
+    <h1 class="titulo-problema">{{ taskDetails.title }}</h1>
     <div class="meta-datos">
-      <p><ion-icon name="location-outline"></ion-icon> Rubí, Barcelona (a 1,9 km)</p>
-      <p><ion-icon name="time-outline"></ion-icon> Hace 1 minuto</p>
+      <p><ion-icon name="location-outline"></ion-icon> {{ taskDetails.client_city || 'Ubicación' }}</p>
+      <p><ion-icon name="time-outline"></ion-icon> Creado el {{ taskDetails.creation_date }}</p>
     </div>
 
     <div class="linea-divisoria"></div>
 
     <div class="seccion">
       <h3 class="subtitulo">Descripción</h3>
-      <p class="texto-descriptivo">El baño se ha roto y cada vez que jalo a la cadena el agua se sale por debajo de la taza inundando todo.</p>
+      <p class="texto-descriptivo">{{ taskDetails.description }}</p>
       
-      <div class="galeria">
-        <div class="foto-evidencia img-placeholder"></div>
-        <div class="foto-evidencia img-placeholder">
-          <ion-icon name="play-circle-outline" class="icono-play"></ion-icon>
+      <div class="seccion" *ngIf="taskDetails">
+        <h3 class="subtitulo">Evidencias del problema</h3>
+        
+        <div class="galeria">
+          <div class="foto-container" *ngIf="taskDetails.photo_1">
+            <img [src]="taskDetails.photo_1" class="foto-real">
+          </div>
+
+          <div class="foto-container" *ngIf="taskDetails.photo_2">
+            <img [src]="taskDetails.photo_2" class="foto-real">
+          </div>
+
+          <div class="img-placeholder" *ngIf="!taskDetails.photo_1 && !taskDetails.photo_2">
+            <p>No hay fotos disponibles</p>
+          </div>
         </div>
       </div>
     </div>
@@ -45,7 +56,7 @@
     <div class="seccion">
       <h3 class="subtitulo-naranja">Notas del profesional</h3>
       <div class="caja-notas">
-        <p>La taza del baño esta completamente rota y se necesitara un reemplazo, además de una instalación completa para arreglar su problema.</p>
+        <p>Presupuesto enviado sujeto a las condiciones de la plataforma.</p>
       </div>
     </div>
 
@@ -53,7 +64,7 @@
       <h3 class="subtitulo">Precio</h3>
       <div class="caja-precio">
         <div class="circulo-euro">€</div>
-        <span class="monto">100</span>
+        <span class="monto">{{ taskDetails.agreed_price }}</span>
       </div>
     </div>
 
@@ -61,10 +72,6 @@
       <div class="opcion activa">
         <div class="checkbox-custom azul"></div>
         <span>Incluye materiales y mano de obra.</span>
-      </div>
-      <div class="opcion">
-        <div class="checkbox-custom blanco"></div>
-        <span>Solo esta incluida la mano de obra.</span>
       </div>
     </div>
 
@@ -74,4 +81,9 @@
     </div>
 
   </div>
+</div>
+
+<div class="cargando-container" *ngIf="loading">
+  <ion-spinner name="crescent"></ion-spinner>
+  <p>Cargando detalles...</p>
 </div>

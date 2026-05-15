@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterLink, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api';
 import { addIcons } from 'ionicons';
+import { ChangeDetectorRef } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { arrowBackOutline, searchOutline, personCircleOutline } from 'ionicons/icons';
 
@@ -29,7 +30,10 @@ export class SearchAProfessionalPage implements OnInit {
   alltheProfessionals: any[] = [];
   professionals: any[] = [];
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) { 
+  constructor(
+    private route: ActivatedRoute, 
+    private apiService: ApiService,
+    private cdr: ChangeDetectorRef) { 
     addIcons({ arrowBackOutline, searchOutline, personCircleOutline });
   }
 
@@ -76,6 +80,8 @@ export class SearchAProfessionalPage implements OnInit {
         console.log('Professionals received:', response);
 
         const realData = response.data || response;
+
+        this.cdr.detectChanges();
 
         if (Array.isArray(realData)) {
           this.alltheProfessionals = realData;
