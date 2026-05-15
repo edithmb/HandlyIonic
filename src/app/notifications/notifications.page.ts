@@ -4,6 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { ApiService } from '../services/api';
+import { ReceiveBudgetComponent } from '../components/receive-budget/receive-budget.component';
+import { SharedMenuComponent } from '../components/shared-menu/shared-menu.component';
+import { SuccessModalComponent } from '../components/success-modal/success-modal.component'; 
+import { ModalController } from '@ionic/angular';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonIcon } from '@ionic/angular/standalone';
 
 import { 
@@ -22,7 +26,7 @@ import {
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonIcon, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, SharedMenuComponent, IonTitle, IonToolbar, IonIcon, CommonModule, FormsModule]
 })
 export class NotificationsPage implements OnInit {
 
@@ -30,7 +34,8 @@ export class NotificationsPage implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private route: Router
+    private router: Router,
+    private modalController: ModalController
   ) {
     addIcons({ 
       documentTextOutline, 
@@ -81,10 +86,54 @@ export class NotificationsPage implements OnInit {
     return 'var(--ion-color-dark)';
   }
 
-  openNotification(notif: any) {
+  async openNotification(notif: any) {
     notif.is_read = 1;
+    const titulo = notif.title.toLowerCase();
 
-    // 2. Aquí puedes redirigir a los detalles de la tarea para ver el presupuesto
-    // this.router.navigate(['/task-details'], { queryParams: { id: notif.task_id } });
+    console.log('1. Clic en notificación:', titulo);
+    console.log('2. ID de la tarea a buscar:', notif.task_id);
+
+    if (titulo.includes('presupuesto')) {
+      const modal = await this.modalController.create({
+        component: ReceiveBudgetComponent,
+        componentProps: { taskId: notif.task_id }
+      });
+      await modal.present();
+    } 
+    
+    // AQUÍ ES DONDE ENTRA EL PROFESIONAL
+    else if (titulo.includes('aceptado')) {
+      console.log('3. ¡Detectó que es aceptado! Llamando a la API...');
+      
+      this.apiService.getTaskDetails(notif.task_id).subscribe({
+        next: async (res: any) => {
+          console.log('4. API respondió con éxito:', res);
+          const tarea = res.data;
+
+          const modal = await this.modalController.create({
+            component: SuccessModalComponent,
+            componentProps: {
+              isProfessional: true,
+              namePerson: `${tarea.client_name} ${tarea.client_surname}`, 
+              titleTask: tarea.title,
+              setTime: tarea.accorded_time ? `Hoy, ${tarea.accorded_time}` : 'Lo antes posible',
+              tokenQr: tarea.token_qr 
+            }
+          });
+          
+          console.log('5. Abriendo modal verde/azul...');
+          await modal.present();
+        },
+        error: (err) => {
+          // Si el modal no se abre, este error rojo nos dirá EXACTAMENTE por qué
+          console.error('ERROR FATAL al descargar detalles de la tarea:', err);
+          alert('Hubo un error de conexión con el servidor.');
+        }
+      });
+    } 
+    
+    else {
+      this.router.navigate(['/task-details'], { queryParams: { id: notif.task_id } });
+    }
   }
 }

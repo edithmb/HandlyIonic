@@ -1,0 +1,43 @@
+<div class="modal-wrapper bg-crema">
+  
+  <div class="modal-body">
+    <div class="illustration-container">
+      <ion-icon name="location" class="icon-pin"></ion-icon>
+      <ion-icon name="person-circle" class="icon-person"></ion-icon>
+    </div>
+
+    <h1 class="fuente-titulos title-cliente" *ngIf="!isProfessional">Cita confirmada</h1>
+    <h1 class="fuente-titulos title-profesional" *ngIf="isProfessional">¡Trato hecho!</h1>
+
+    <p class="subtitle" *ngIf="!isProfessional">
+      Tu cita con <strong>{{ namePerson }}</strong> ha sido confirmada
+    </p>
+    <p class="subtitle" *ngIf="isProfessional">
+      Tu cita con <strong>{{ namePerson }}</strong> ha sido confirmada
+    </p>
+
+    <div class="task-details">
+      <h3 class="task-title">{{ titleTask }}</h3>
+
+      <div class="time-container">
+        <ion-icon name="location-outline"></ion-icon>
+        <span>Hoy, {{ timeSet }}</span>
+      </div>
+    </div>
+
+    <ion-button expand="block" class="btn-verde" *ngIf="!isProfessional" (click)="seeDetails()">
+      Ver detalles del trabajo
+    </ion-button>
+
+    <div class="qr-container" *ngIf="isProfessional">
+      <p class="qr-instruction">Muestra este código al cliente al llegar</p>
+    
+      <qrcode *ngIf="tokenQr" [qrdata]="tokenQr" [width]="150" [errorCorrectionLevel]="'M'"></qrcode>
+
+      <ion-button expand="block" fill="clear" class="btn-cerrar" (click)="close()">
+        Cerrar
+      </ion-button>
+    </div>
+
+  </div>
+</div>

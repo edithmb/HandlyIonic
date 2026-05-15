@@ -20,6 +20,7 @@ export class SharedMenuComponent  implements OnInit {
 
   startRoute: string = '/home-client';
   profileRoute: string = '/client-profile';
+  chatRoute: string = '/chat-client';
   newNotifications: boolean = false;
 
   constructor(private apiService: ApiService) { }
@@ -30,9 +31,10 @@ export class SharedMenuComponent  implements OnInit {
     if (userKeeped) {
       const user = JSON.parse(userKeeped);
 
-      if (user.rol_id === 2) {
+      if (user.rol_id == 2 || user.role_id == 2) {
       this.startRoute = '/home-professional';
       this.profileRoute = '/professional-profile';
+      this.chatRoute = '/chat-professional';
       }
     }
   }
