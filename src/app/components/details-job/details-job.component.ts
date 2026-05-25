@@ -4,6 +4,7 @@ import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { FormBudgetComponent } from '../form-budget/form-budget.component';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ApiService } from '../../services/api';
 // Importamos iconos 
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, locationOutline, timeOutline, playCircleOutline, calendarOutline } from 'ionicons/icons';
@@ -28,7 +29,9 @@ export class DetailsJobComponent  implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private http: HttpClient,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private apiService: ApiService
+
   ) { }
 
   
@@ -39,14 +42,7 @@ export class DetailsJobComponent  implements OnInit {
   }
 
   cargarDetallesCompletos() {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    const apiUrl = `${environment.apiUrl}/tasks/${this.tareaDatos.task_id}/details`;
-
-    this.http.get(apiUrl, { headers }).subscribe({
+    this.apiService.getTaskDetails(this.tareaDatos.task_id).subscribe({
       next: (response: any) => {
         if (response.status === 'success') {
           this.tareaCompleta = response.data;
@@ -87,17 +83,7 @@ async hacerOferta() {
 }
 
   async rechazar() {
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    
-    const payload = { task_state_id: 6 }; //cancelled
-
-    const apiUrl = `${environment.apiUrl}/tasks/${this.tareaCompleta.task_id}/status`;
-
-    this.http.patch(apiUrl, payload, { headers }).subscribe({
+    this.apiService.updateTaskStatus(this.tareaCompleta.task_id, 6).subscribe({
       next: async (response: any) => {
         // Mostramos el mensaje de éxito
         const toast = await this.toastController.create({

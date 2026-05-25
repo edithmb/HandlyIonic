@@ -50,11 +50,11 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/notifications`, { headers });
   }
 
-  //Para que el profesional envíe el presupuesto
-  enviarPresupuesto(taskId: number, precio: number) {
+// Para que el profesional envíe el presupuesto (Actualizado para recibir el payload completo)
+  enviarPresupuesto(taskId: number, payload: any) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
-    return this.http.post(`${this.baseUrl}/tasks/${taskId}/budget`, { agreed_price: precio }, { headers });
+    return this.http.post(`${this.baseUrl}/tasks/${taskId}/budget`, payload, { headers });
   }
 
   //Para que el profesional rechace la tarea (Cambia el estado a 3 = Rechazado)
@@ -82,5 +82,26 @@ export class ApiService {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     return this.http.get(`${this.baseUrl}/tasks/client`, { headers });
+  }
+
+  // Para verificar el email con el código OTP
+  verifyEmail(payload: any) {
+    return this.http.post(`${this.baseUrl}/verify-email`, payload);
+  }
+
+  // Función para subir los documentos de identidad (recibe FormData)
+  uploadDocuments(formData: FormData) {
+    return this.http.post(`${this.baseUrl}/upload-documents`, formData);
+  }
+
+  // Para actualizar el estado de una tarea 
+  updateTaskStatus(taskId: number, statusId: number) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    return this.http.patch(`${this.baseUrl}/tasks/${taskId}/status`, { task_state_id: statusId }, { headers });
+  }
+  // Función para registrar a un cliente
+  registerClient(payload: any) {
+    return this.http.post(`${this.baseUrl}/register/client`, payload);
   }
 }

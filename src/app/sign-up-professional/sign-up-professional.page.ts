@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 import { TranslateModule } from '@ngx-translate/core';
 import { addIcons } from 'ionicons';
 import { addCircle, trashOutline, alertCircleOutline, chevronDownOutline } from 'ionicons/icons';
+import { ApiService } from '../services/api';
 
 addIcons({
   addCircle,
@@ -44,7 +45,8 @@ export class SignUpProfessionalPage implements OnInit {
 
   constructor(private router: Router, 
     private toastController: ToastController,
-    private http: HttpClient
+    private http: HttpClient,
+    private apiService: ApiService
   ) { }
 
   ngOnInit() {
@@ -53,13 +55,10 @@ export class SignUpProfessionalPage implements OnInit {
   }
 
   obtenerProfesionesDeBD() {
-    const apiUrl = `${environment.apiUrl}/professions`;
-    this.http.get(apiUrl).subscribe({
+    this.apiService.getProfessionalJobs().subscribe({
       next: (response: any) => {
-        if (response.status === 'success') {
-          this.profesionesDB = response.data;
-          console.log('Profesiones cargadas desde la BD:', this.profesionesDB);
-        }
+        this.profesionesDB = response.data || response; 
+        console.log('Profesiones cargadas desde la BD:', this.profesionesDB);
       },
       error: (err) => {
         console.error('Error al cargar profesiones:', err);
