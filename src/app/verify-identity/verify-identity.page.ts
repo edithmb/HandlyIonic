@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router'; 
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../services/api';
 import { environment } from '../../environments/environment';
 
 // Importamos los iconos
@@ -35,7 +35,7 @@ export class VerifyIdentityPage implements OnInit {
   constructor(
     private router: Router, 
     private toastController: ToastController,
-    private http: HttpClient  
+    private apiService: ApiService 
   ) { 
     // Registramos los iconos
     addIcons({ cameraOutline, idCardOutline, checkmarkCircle, cloudUploadOutline });
@@ -93,7 +93,7 @@ export class VerifyIdentityPage implements OnInit {
     // peticion a la api 
     const apiUrl = `${environment.apiUrl}/upload-documents`;
 
-    this.http.post(apiUrl, formData).subscribe({
+    this.apiService.uploadDocuments(formData).subscribe({
       next: async (response: any) => {
         console.log('Fotos subidas con éxito:', response);
         localStorage.removeItem('registro_email');

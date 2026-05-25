@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { ApiService } from '../../services/api';
 
 @Component({
   selector: 'app-form-budget',
@@ -25,7 +26,9 @@ export class FormBudgetComponent  implements OnInit {
   constructor(
     private modalCtrl: ModalController,
     private http: HttpClient,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private apiService: ApiService
+    
   ) { }
 
   ngOnInit() {
@@ -64,20 +67,10 @@ export class FormBudgetComponent  implements OnInit {
       includes_materials: this.incluyeMateriales
     };
 
-    const token = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-    });
-
-    // llamada a api
-    const apiUrl = `${environment.apiUrl}/tasks/${this.taskId}/budget`;
-
-    // Hacemos el POST 
-    this.http.post(apiUrl, payload, { headers }).subscribe({
+    this.apiService.enviarPresupuesto(this.taskId, payload).subscribe({
       next: (response: any) => {
         this.enviando = false;
         this.presentToast('¡Presupuesto enviado con éxito!', 'exito');
-        // Cerramos y avisamos que se envió bien
         this.modalCtrl.dismiss({ enviado: true });
       },
       error: (err) => {

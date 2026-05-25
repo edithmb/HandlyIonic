@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../services/api';
 
 @Component({
   selector: 'app-sign-up-client',
@@ -31,7 +32,8 @@ export class SignUpClientPage implements OnInit {
   constructor(
     private router: Router, 
     private toastController: ToastController,
-    private http: HttpClient
+    private http: HttpClient,
+    private apiService: ApiService
   ) { }
 
   ngOnInit() {
@@ -139,10 +141,7 @@ export class SignUpClientPage implements OnInit {
       country: country
     };
 
-    // peticion a api
-    const apiUrl = `${environment.apiUrl}/register/client`;
-
-    this.http.post(apiUrl, payload).subscribe({
+    this.apiService.registerClient(payload).subscribe({
       next: async (response: any) => {
         console.log('Respuesta del servidor:', response);
         localStorage.setItem('registro_email', this.registerData.email);
@@ -155,8 +154,6 @@ export class SignUpClientPage implements OnInit {
         this.presentToast(mensajeError, 'error');
       }
     });
-
-    
   }
 
   navigateToSignIn() {
